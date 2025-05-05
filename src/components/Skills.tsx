@@ -1,5 +1,5 @@
 
-import { Code, Server, Database, Terminal, Docker, Github, Aws, Laptop } from "lucide-react";
+import { Code, Server, Database, Terminal, Github, Laptop, Box, Cloud } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Skill {
@@ -19,9 +19,9 @@ const skills: Skill[] = [
   { name: "MongoDB", icon: Database, category: "databases" },
   { name: "PostgreSQL", icon: Database, category: "databases" },
   { name: "Redis", icon: Database, category: "databases" },
-  { name: "Docker", icon: Docker, category: "tools" },
+  { name: "Docker", icon: Box, category: "tools" },
   { name: "Git", icon: Github, category: "tools" },
-  { name: "AWS", icon: Aws, category: "tools" },
+  { name: "AWS", icon: Cloud, category: "tools" },
   { name: "CI/CD", icon: Terminal, category: "tools" },
   { name: "REST API", icon: Server, category: "frameworks" },
   { name: "Jest", icon: Terminal, category: "tools" },
