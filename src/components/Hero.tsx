@@ -15,7 +15,7 @@ const Hero = () => {
               John Doe
             </h1>
             <h3 className="text-2xl md:text-3xl text-foreground/80 mb-6">
-              Backend Developer
+              <span className="animated-text">Backend Developer</span>
             </h3>
             <p className="text-lg text-foreground/70 mb-8 max-w-lg">
               I build scalable, reliable and maintainable backend systems that power modern web applications.

@@ -122,4 +122,26 @@
   .project-card {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
+  
+  .animated-text {
+    background: linear-gradient(-45deg, #2196F3, #4CAF50, #00BCD4, #3F51B5);
+    background-size: 300% 300%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient-animation 6s ease infinite;
+    font-weight: bold;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
