@@ -36,10 +36,10 @@ const categories = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="bg-gray-50 py-16 md:py-24">
+    <section id="skills" className="bg-secondary/30 py-16 md:py-24">
       <div className="section-container">
         <h2 className="section-title">Skills</h2>
-        <p className="text-lg text-gray-600 mb-12 max-w-3xl">
+        <p className="text-lg text-foreground/80 mb-12 max-w-3xl">
           Here are some of the technologies, tools, and platforms I work with
           regularly as a backend developer.
         </p>
@@ -54,7 +54,7 @@ const Skills = () => {
                   .map((skill, index) => (
                     <div
                       key={skill.name}
-                      className="bg-white rounded-lg shadow-sm p-4 flex items-center space-x-3 hover:shadow-md transition-shadow"
+                      className="bg-card rounded-lg shadow-sm p-4 flex items-center space-x-3 hover:shadow-md transition-shadow border border-border/30"
                     >
                       <skill.icon className="h-5 w-5 text-primary" />
                       <span className="font-medium">{skill.name}</span>

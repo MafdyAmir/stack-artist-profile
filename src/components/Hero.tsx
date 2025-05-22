@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-gray-50 to-white"
+      className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-secondary/20 to-background"
     >
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -14,10 +14,10 @@ const Hero = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               John Doe
             </h1>
-            <h3 className="text-2xl md:text-3xl text-gray-700 mb-6">
+            <h3 className="text-2xl md:text-3xl text-foreground/80 mb-6">
               Backend Developer
             </h3>
-            <p className="text-lg text-gray-600 mb-8 max-w-lg">
+            <p className="text-lg text-foreground/70 mb-8 max-w-lg">
               I build scalable, reliable and maintainable backend systems that power modern web applications.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -31,9 +31,9 @@ const Hero = () => {
           </div>
           <div className="hidden md:block animate-on-scroll">
             <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-blue-600 rounded-lg blur opacity-30"></div>
-              <div className="relative bg-white p-6 rounded-lg shadow-xl">
-                <pre className="text-xs sm:text-sm font-mono bg-gray-50 p-4 rounded overflow-x-auto">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-primary/30 rounded-lg blur opacity-30"></div>
+              <div className="relative bg-card p-6 rounded-lg shadow-xl border border-border/30">
+                <pre className="text-xs sm:text-sm font-mono bg-background/60 p-4 rounded overflow-x-auto">
 {`// backend.js
 const express = require('express');
 const app = express();
