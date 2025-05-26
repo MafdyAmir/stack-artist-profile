@@ -3,6 +3,7 @@ import { Code, Server, Database, Terminal, Github, Laptop, Box, Cloud } from "lu
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Skill {
   name: string;
@@ -37,6 +38,18 @@ const categories = [
   { id: "tools", label: "Tools & Platforms" },
 ];
 
+const getProficiencyDots = (level: number) => {
+  return Array.from({ length: 5 }, (_, i) => (
+    <div
+      key={i}
+      className={cn(
+        "w-2 h-2 rounded-full transition-colors duration-300",
+        i < level ? "bg-primary" : "bg-muted"
+      )}
+    />
+  ));
+};
+
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("languages");
 
@@ -62,29 +75,29 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="animate-on-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div className="animate-on-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {skills
             .filter((skill) => skill.category === activeCategory)
             .map((skill, index) => (
-              <div
+              <Card
                 key={skill.name}
-                className="skill-card bg-card rounded-lg shadow-sm p-4 border border-border/30 flex flex-col items-center space-y-4 hover:shadow-lg transition-all duration-300"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80"
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="p-3 rounded-full bg-primary/10 text-primary">
-                  <skill.icon className="h-6 w-6" />
-                </div>
-                <span className="font-medium text-center">{skill.name}</span>
-                <div className="w-full h-2 bg-secondary/50 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-primary transition-all duration-1000 rounded-full"
-                    style={{ 
-                      width: `${skill.proficiency * 20}%`,
-                      animationDelay: `${(index * 100) + 500}ms`
-                    }}
-                  ></div>
-                </div>
-              </div>
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                  <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300 group-hover:scale-110 transform">
+                    <skill.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-sm md:text-base group-hover:text-primary transition-colors duration-300">
+                      {skill.name}
+                    </h3>
+                    <div className="flex gap-1 justify-center">
+                      {getProficiencyDots(skill.proficiency)}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
         </div>
       </div>
