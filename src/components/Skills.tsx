@@ -38,18 +38,6 @@ const categories = [
   { id: "tools", label: "Tools & Platforms" },
 ];
 
-const getProficiencyDots = (level: number) => {
-  return Array.from({ length: 5 }, (_, i) => (
-    <div
-      key={i}
-      className={cn(
-        "w-2 h-2 rounded-full transition-colors duration-300",
-        i < level ? "bg-primary" : "bg-muted"
-      )}
-    />
-  ));
-};
-
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("languages");
 
@@ -81,21 +69,16 @@ const Skills = () => {
             .map((skill, index) => (
               <Card
                 key={skill.name}
-                className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80"
+                className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-                  <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300 group-hover:scale-110 transform">
-                    <skill.icon className="h-8 w-8 text-primary" />
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-3">
+                  <div className="p-4 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <skill.icon className="h-10 w-10 text-primary group-hover:text-primary transition-colors duration-300" />
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-sm md:text-base group-hover:text-primary transition-colors duration-300">
-                      {skill.name}
-                    </h3>
-                    <div className="flex gap-1 justify-center">
-                      {getProficiencyDots(skill.proficiency)}
-                    </div>
-                  </div>
+                  <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300">
+                    {skill.name}
+                  </h3>
                 </CardContent>
               </Card>
             ))}
