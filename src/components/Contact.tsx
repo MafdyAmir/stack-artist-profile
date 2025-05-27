@@ -35,14 +35,14 @@ const Contact = () => {
       <div className="section-container">
         <h2 className="section-title">Contact Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-          <div className="animate-on-scroll">
-            <p className="text-lg text-gray-700 mb-6">
+          <div className="flex flex-col rounded-md border border-gray-200 p-8 ">
+            <p className="text-lg text-gray-700 mb-6 dark:text-gray-400 ">
               I'm currently open for new opportunities and collaborations. If you'd like to discuss a project or just say hello, feel free to reach out through the form or my social links.
             </p>
-            <div className="flex flex-col space-y-4 mt-8">
+            <div className="flex flex-col space-y-4 mt-8 ">
               <a
                 href="mailto:contact@example.com"
-                className="flex items-center text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
               >
                 <Mail className="h-5 w-5 mr-3" />
                 contact@example.com
@@ -51,7 +51,7 @@ const Contact = () => {
                 href="https://github.com/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
               >
                 <Github className="h-5 w-5 mr-3" />
                 github.com/yourusername
@@ -60,7 +60,7 @@ const Contact = () => {
                 href="https://linkedin.com/in/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center  dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
               >
                 <Linkedin className="h-5 w-5 mr-3" />
                 linkedin.com/in/yourusername
@@ -68,49 +68,49 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="animate-on-scroll">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="animate-on-scroll rounded-md border border-gray-200 p-8">
+            <form onSubmit={ handleSubmit } className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
                   Name
                 </label>
                 <Input
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  value={ formData.name }
+                  onChange={ handleChange }
                   required
                   className="w-full"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
                   Email
                 </label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={ formData.email }
+                  onChange={ handleChange }
                   required
                   className="w-full"
                   placeholder="your.email@example.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
                   Message
                 </label>
                 <Textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  value={ formData.message }
+                  onChange={ handleChange }
                   required
                   className="w-full"
-                  rows={5}
+                  rows={ 5 }
                   placeholder="Your message here..."
                 />
               </div>
