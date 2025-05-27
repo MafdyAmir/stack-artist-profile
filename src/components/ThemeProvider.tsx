@@ -13,12 +13,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (!mounted) {
-    return <>{children}</>;
+    return <>{ children }</>;
   }
 
   return (
     <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-      {children}
+      { children }
     </NextThemesProvider>
   );
 }

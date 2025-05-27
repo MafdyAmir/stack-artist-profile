@@ -1,18 +1,31 @@
 
 import { Button } from "@/components/ui/button";
-import { GitBranch, Code, Terminal } from "lucide-react";
+import { GitBranch, Code } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
+
+
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
+  const theme = useTheme();
+
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
-    
+
     return () => clearTimeout(timer);
   }, []);
+
+  const [terminalLineData, setTerminalLineData] = useState([
+    <TerminalOutput >$ Welcome to Mafdy's Portfolio Terminal!</TerminalOutput>,
+    <TerminalOutput>$ I am Mafdy — a passionate backend developer.</TerminalOutput>,
+    <TerminalOutput>$ Skilled in Node.js, Express.js, and MongoDB.</TerminalOutput>,
+  ]);
 
   return (
     <section
@@ -21,7 +34,7 @@ const Hero = () => {
     >
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={ `transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}` }>
             <h2 className="text-lg font-medium text-primary mb-2 animate-pulse">Hello, I'm</h2>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               John Doe
@@ -45,32 +58,15 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-primary/30 rounded-lg blur opacity-40 animate-pulse"></div>
               <div className="relative bg-card p-6 rounded-lg shadow-xl border border-border/30">
-                <div className="flex items-center mb-3">
-                  <div className="w-3 h-3 rounded-full bg-destructive/70 mr-2"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400/70 mr-2"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
-                  <span className="ml-auto text-xs text-foreground/60 font-mono">server.js</span>
-                </div>
-                <pre className="text-xs sm:text-sm font-mono bg-background/60 p-4 rounded overflow-x-auto">
-{`// backend.js
-const express = require('express');
-const app = express();
-
-app.get('/api/hello', (req, res) => {
-  res.json({ 
-    message: 'Hello, I build robust 
-    backend systems!'
-  });
-});
-
-// Connect to database
-initDatabase()
-  .then(() => {
-    app.listen(3000, () => {
-      console.log('Server running...');
-    });
-  });`}
-                </pre>
+                <Terminal
+                  height={ "300px " }
+                  colorMode={ ColorMode.Dark }
+                  onInput={ (terminalInput) =>
+                    console.log(`New terminal input received: '${terminalInput}'`)
+                  }
+                >
+                  { terminalLineData }
+                </Terminal>
               </div>
             </div>
           </div>
@@ -79,5 +75,6 @@ initDatabase()
     </section>
   );
 };
+
 
 export default Hero;

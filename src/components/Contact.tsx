@@ -35,40 +35,44 @@ const Contact = () => {
       <div className="section-container">
         <h2 className="section-title">Contact Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-          <div className="flex flex-col rounded-md border border-gray-200 p-8 ">
-            <p className="text-lg text-gray-700 mb-6 dark:text-gray-400 ">
-              I'm currently open for new opportunities and collaborations. If you'd like to discuss a project or just say hello, feel free to reach out through the form or my social links.
+          <div className="flex flex-col rounded-2xl border border-gray-200 dark:border-gray-700 p-10 shadow-md bg-white dark:bg-gray-900 transition-all">
+            <p className="text-xl text-gray-800 dark:text-gray-300 mb-8 leading-relaxed">
+              I'm currently open for new opportunities and collaborations. If you'd like to discuss a project or just say hello, feel free to reach out through the form or my social links below.
             </p>
-            <div className="flex flex-col space-y-4 mt-8 ">
+
+            <div className="flex flex-col space-y-5">
               <a
                 href="mailto:contact@example.com"
-                className="flex items-center dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
               >
-                <Mail className="h-5 w-5 mr-3" />
-                contact@example.com
+                <Mail className="h-6 w-6 mr-4 text-primary" />
+                <span className="text-base">contact@example.com</span>
               </a>
+
               <a
                 href="https://github.com/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
               >
-                <Github className="h-5 w-5 mr-3" />
-                github.com/yourusername
+                <Github className="h-6 w-6 mr-4 text-primary" />
+                <span className="text-base">github.com/yourusername</span>
               </a>
+
               <a
                 href="https://linkedin.com/in/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center  dark:text-gray-400 text-gray-700 hover:text-primary transition-colors"
+                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
               >
-                <Linkedin className="h-5 w-5 mr-3" />
-                linkedin.com/in/yourusername
+                <Linkedin className="h-6 w-6 mr-4 text-primary" />
+                <span className="text-base">linkedin.com/in/yourusername</span>
               </a>
             </div>
           </div>
 
-          <div className="animate-on-scroll rounded-md border border-gray-200 p-8">
+
+          <div className="animate-on-scroll rounded-2xl border border-gray-200 p-8 shadow-lg shadow-primary/20 transition-all duration-300 -translate-y-2  border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer">
             <form onSubmit={ handleSubmit } className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">

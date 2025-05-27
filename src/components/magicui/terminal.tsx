@@ -17,13 +17,13 @@ export const AnimatedSpan = ({
   ...props
 }: AnimatedSpanProps) => (
   <motion.div
-    initial={{ opacity: 0, y: -5 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3, delay: delay / 1000 }}
-    className={cn("grid text-sm font-normal tracking-tight", className)}
-    {...props}
+    initial={ { opacity: 0, y: -5 } }
+    animate={ { opacity: 1, y: 0 } }
+    transition={ { duration: 0.3, delay: delay / 1000 } }
+    className={ cn("grid text-sm font-normal tracking-tight", className) }
+    { ...props }
   >
-    {children}
+    { children }
   </motion.div>
 );
 
@@ -82,11 +82,11 @@ export const TypingAnimation = ({
 
   return (
     <MotionComponent
-      ref={elementRef}
-      className={cn("text-sm font-normal tracking-tight", className)}
-      {...props}
+      ref={ elementRef }
+      className={ cn("text-sm font-normal tracking-tight", className) }
+      { ...props }
     >
-      {displayedText}
+      { displayedText }
     </MotionComponent>
   );
 };
@@ -99,10 +99,10 @@ interface TerminalProps {
 export const Terminal = ({ children, className }: TerminalProps) => {
   return (
     <div
-      className={cn(
+      className={ cn(
         "z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background",
         className,
-      )}
+      ) }
     >
       <div className="flex flex-col gap-y-2 border-b border-border p-4">
         <div className="flex flex-row gap-x-2">
@@ -112,7 +112,7 @@ export const Terminal = ({ children, className }: TerminalProps) => {
         </div>
       </div>
       <pre className="p-4">
-        <code className="grid gap-y-1 overflow-auto">{children}</code>
+        <code className="grid gap-y-1 overflow-auto">{ children }</code>
       </pre>
     </div>
   );
