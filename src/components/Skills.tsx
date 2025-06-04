@@ -32,6 +32,7 @@ const skills: Skill[] = [
 ];
 
 const categories = [
+  { id: "all", label: "All Categories" },
   { id: "languages", label: "Languages" },
   { id: "frameworks", label: "Frameworks & Libraries" },
   { id: "databases", label: "Databases" },
@@ -39,7 +40,11 @@ const categories = [
 ];
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("languages");
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const filteredSkills = activeCategory === "all" 
+    ? skills 
+    : skills.filter((skill) => skill.category === activeCategory);
 
   return (
     <section id="skills" className="bg-gradient-to-br from-secondary/30 to-background py-16 md:py-24">
@@ -64,24 +69,22 @@ const Skills = () => {
         </div>
 
         <div className="animate-on-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-          {skills
-            .filter((skill) => skill.category === activeCategory)
-            .map((skill, index) => (
-              <Card
-                key={skill.name}
-                className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <CardContent className="p-6 flex flex-col items-center text-center space-y-3">
-                  <div className="p-4 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                    <skill.icon className="h-10 w-10 text-primary group-hover:text-primary transition-colors duration-300" />
-                  </div>
-                  <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300">
-                    {skill.name}
-                  </h3>
-                </CardContent>
-              </Card>
-            ))}
+          {filteredSkills.map((skill, index) => (
+            <Card
+              key={skill.name}
+              className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                <div className="p-4 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <skill.icon className="h-12 w-12 text-primary group-hover:text-primary transition-colors duration-300" />
+                </div>
+                <h3 className="font-semibold text-lg group-hover:text-primary transition-colors duration-300">
+                  {skill.name}
+                </h3>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
