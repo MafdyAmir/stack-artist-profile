@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
 
@@ -24,10 +25,9 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // This would normally send the form data to a backend
     console.log("Form submitted:", formData);
     alert("Thank you for your message! This is a demo form - in a real portfolio, this would send your message.");
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   return (
@@ -35,86 +35,144 @@ const Contact = () => {
       <div className="section-container">
         <h2 className="section-title">Contact Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-          <div className="flex flex-col rounded-2xl border border-gray-200 dark:border-gray-700 p-10 shadow-md bg-white dark:bg-gray-900 transition-all">
-            <p className="text-xl text-gray-800 dark:text-gray-300 mb-8 leading-relaxed">
-              I'm currently open for new opportunities and collaborations. If you'd like to discuss a project or just say hello, feel free to reach out through the form or my social links below.
-            </p>
+          {/* Contact Information */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                I'm currently open for new opportunities and collaborations. Feel free to reach out!
+              </p>
+            </div>
 
-            <div className="flex flex-col space-y-5">
-              <a
-                href="mailto:contact@example.com"
-                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
-              >
-                <Mail className="h-6 w-6 mr-4 text-primary" />
-                <span className="text-base">contact@example.com</span>
-              </a>
+            <div className="space-y-4">
+              {/* Location */}
+              <div className="flex items-center space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-foreground">Location</h4>
+                  <p className="text-muted-foreground">Your City, Country</p>
+                </div>
+              </div>
 
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
-              >
-                <Github className="h-6 w-6 mr-4 text-primary" />
-                <span className="text-base">github.com/yourusername</span>
-              </a>
+              {/* Email */}
+              <div className="flex items-center space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-foreground">Email</h4>
+                  <a 
+                    href="mailto:contact@example.com"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    contact@example.com
+                  </a>
+                </div>
+              </div>
 
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-gray-700 dark:text-gray-400 hover:text-primary dark:hover:text-white  transition-all duration-200"
-              >
-                <Linkedin className="h-6 w-6 mr-4 text-primary" />
-                <span className="text-base">linkedin.com/in/yourusername</span>
-              </a>
+              {/* Phone */}
+              <div className="flex items-center space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Phone className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-foreground">Phone</h4>
+                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Connect with me */}
+            <div className="pt-6">
+              <h4 className="font-medium text-foreground mb-4">Connect with me</h4>
+              <div className="flex space-x-4">
+                <a
+                  href="https://github.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
+                  <Github className="h-5 w-5 text-primary" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
+                  <Linkedin className="h-5 w-5 text-primary" />
+                </a>
+                <a
+                  href="mailto:contact@example.com"
+                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
+                  <Mail className="h-5 w-5 text-primary" />
+                </a>
+              </div>
             </div>
           </div>
 
-
-          <div className="animate-on-scroll rounded-2xl border border-gray-200 p-8 shadow-lg shadow-primary/20 transition-all duration-300 -translate-y-2  border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer">
-            <form onSubmit={ handleSubmit } className="space-y-6">
+          {/* Contact Form */}
+          <div className="animate-on-scroll rounded-2xl border border-gray-200 p-8 shadow-lg shadow-primary/20 transition-all duration-300 -translate-y-2 border-primary/30 bg-gradient-to-br from-card to-card/80">
+            <h3 className="text-2xl font-bold text-foreground mb-6">Send a Message</h3>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-                  Name
+                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                  Your Name
                 </label>
                 <Input
                   id="name"
                   name="name"
-                  value={ formData.name }
-                  onChange={ handleChange }
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                   className="w-full"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-                  Email
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                  Your Email
                 </label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  value={ formData.email }
-                  onChange={ handleChange }
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full"
                   placeholder="your.email@example.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                  Subject
+                </label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full"
+                  placeholder="What's this about?"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                   Message
                 </label>
                 <Textarea
                   id="message"
                   name="message"
-                  value={ formData.message }
-                  onChange={ handleChange }
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   className="w-full"
-                  rows={ 5 }
+                  rows={5}
                   placeholder="Your message here..."
                 />
               </div>
