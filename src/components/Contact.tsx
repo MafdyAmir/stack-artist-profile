@@ -36,16 +36,15 @@ const Contact = () => {
       <div className="section-container">
         <h2 className="section-title">Contact Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
+          {/* Contact Information Card */}
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <CardHeader>
+              <CardTitle className="text-2xl">Contact Information</CardTitle>
+              <p className="text-muted-foreground leading-relaxed">
                 I'm currently open for new opportunities and collaborations. Feel free to reach out!
               </p>
-            </div>
-
-            <div className="space-y-4">
+            </CardHeader>
+            <CardContent className="space-y-4">
               {/* Location */}
               <div className="flex items-center space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-colors">
                 <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
@@ -83,37 +82,37 @@ const Contact = () => {
                   <p className="text-muted-foreground">+1 (555) 123-4567</p>
                 </div>
               </div>
-            </div>
 
-            {/* Connect with me */}
-            <div className="pt-6">
-              <h4 className="font-medium text-foreground mb-4">Connect with me</h4>
-              <div className="flex space-x-4">
-                <a
-                  href="https://github.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
-                >
-                  <Github className="h-5 w-5 text-primary" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
-                >
-                  <Linkedin className="h-5 w-5 text-primary" />
-                </a>
-                <a
-                  href="mailto:contact@example.com"
-                  className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
-                >
-                  <Mail className="h-5 w-5 text-primary" />
-                </a>
+              {/* Connect with me */}
+              <div className="pt-6 border-t border-border">
+                <h4 className="font-medium text-foreground mb-4">Connect with me</h4>
+                <div className="flex space-x-4">
+                  <a
+                    href="https://github.com/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                  >
+                    <Github className="h-5 w-5 text-primary" />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5 text-primary" />
+                  </a>
+                  <a
+                    href="mailto:contact@example.com"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                  >
+                    <Mail className="h-5 w-5 text-primary" />
+                  </a>
+                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Contact Form */}
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
