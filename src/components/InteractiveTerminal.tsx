@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -246,7 +247,7 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent"></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
