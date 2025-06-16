@@ -38,34 +38,34 @@ const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
           {/* Contact Information Card */}
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 h-fit">
-            <CardHeader className="pb-4">
+            <CardHeader className="pb-6">
               <CardTitle className="text-2xl">Contact Information</CardTitle>
               <p className="text-muted-foreground leading-relaxed">
                 I'm currently open for new opportunities and collaborations. Feel free to reach out!
               </p>
             </CardHeader>
-            <CardContent className="space-y-4 pt-0">
+            <CardContent className="space-y-6 pt-0">
               {/* Location */}
-              <div className="flex items-center space-x-4 p-2">
-                <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <MapPin className="h-5 w-5 text-primary" />
+              <div className="flex items-center space-x-4 p-3">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground">Location</h4>
-                  <p className="text-muted-foreground text-sm">Your City, Country</p>
+                  <h4 className="font-medium text-foreground text-base">Location</h4>
+                  <p className="text-muted-foreground">Your City, Country</p>
                 </div>
               </div>
 
               {/* Email */}
-              <div className="flex items-center space-x-4 p-2">
-                <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Mail className="h-5 w-5 text-primary" />
+              <div className="flex items-center space-x-4 p-3">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground">Email</h4>
+                  <h4 className="font-medium text-foreground text-base">Email</h4>
                   <a 
                     href="mailto:contact@example.com"
-                    className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     contact@example.com
                   </a>
@@ -73,41 +73,41 @@ const Contact = () => {
               </div>
 
               {/* Phone */}
-              <div className="flex items-center space-x-4 p-2">
-                <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Phone className="h-5 w-5 text-primary" />
+              <div className="flex items-center space-x-4 p-3">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground">Phone</h4>
-                  <p className="text-muted-foreground text-sm">+1 (555) 123-4567</p>
+                  <h4 className="font-medium text-foreground text-base">Phone</h4>
+                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
                 </div>
               </div>
 
               {/* Connect with me */}
-              <div className="pt-4 border-t border-border">
-                <h4 className="font-medium text-foreground mb-3">Connect with me</h4>
-                <div className="flex space-x-3">
+              <div className="pt-6 border-t border-border">
+                <h4 className="font-medium text-foreground mb-4 text-base">Connect with me</h4>
+                <div className="flex space-x-4">
                   <a
                     href="https://github.com/yourusername"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
                   >
-                    <Github className="h-4 w-4 text-primary" />
+                    <Github className="h-5 w-5 text-primary" />
                   </a>
                   <a
                     href="https://linkedin.com/in/yourusername"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
                   >
-                    <Linkedin className="h-4 w-4 text-primary" />
+                    <Linkedin className="h-5 w-5 text-primary" />
                   </a>
                   <a
                     href="mailto:contact@example.com"
-                    className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                    className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
                   >
-                    <Mail className="h-4 w-4 text-primary" />
+                    <Mail className="h-5 w-5 text-primary" />
                   </a>
                 </div>
               </div>
