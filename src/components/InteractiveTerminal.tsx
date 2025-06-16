@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -181,49 +180,88 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
   }, []);
 
   return (
-    <div className={cn("bg-slate-900 text-green-400 rounded-lg border border-slate-700 overflow-hidden", className)}>
+    <div className={cn(
+      "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-emerald-400 rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl backdrop-blur-sm",
+      "relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-emerald-500/5 before:via-transparent before:to-blue-500/5 before:pointer-events-none",
+      className
+    )}>
       {/* Terminal Header */}
-      <div className="flex items-center gap-2 bg-slate-800 px-4 py-3 border-b border-slate-700">
+      <div className="flex items-center gap-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 px-5 py-4 border-b border-slate-600/30 backdrop-blur-sm">
         <div className="flex gap-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg shadow-red-500/30 ring-1 ring-red-300/20"></div>
+          <div className="w-3 h-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg shadow-yellow-500/30 ring-1 ring-yellow-300/20"></div>
+          <div className="w-3 h-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/30 ring-1 ring-green-300/20"></div>
         </div>
-        <span className="text-slate-300 text-sm ml-4">portfolio@terminal:~</span>
+        <div className="flex items-center gap-2 ml-4">
+          <div className="w-4 h-4 text-slate-400">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <span className="text-slate-300 text-sm font-medium tracking-wider">mafdy@portfolio</span>
+          <span className="text-slate-500 text-sm">~</span>
+        </div>
       </div>
 
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="p-4 h-80 overflow-y-auto font-mono text-sm leading-relaxed"
+        className="p-6 h-80 overflow-y-auto font-mono text-sm leading-relaxed custom-scrollbar"
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((line, index) => (
           <div key={index} className={cn(
-            "mb-1",
-            line.type === 'command' && "text-blue-400",
-            line.type === 'output' && "text-green-300",
-            line.type === 'system' && "text-yellow-400"
+            "mb-1.5 transition-all duration-200",
+            line.type === 'command' && "text-cyan-300 font-medium",
+            line.type === 'output' && "text-emerald-300 pl-2",
+            line.type === 'system' && "text-amber-300 font-medium"
           )}>
-            {line.content}
+            {line.type === 'command' && (
+              <span className="text-blue-400 mr-1">❯</span>
+            )}
+            <span className="select-text">{line.content}</span>
           </div>
         ))}
         
         {/* Current Input Line */}
-        <form onSubmit={handleSubmit} className="flex items-center">
-          <span className="text-blue-400 mr-2">$</span>
+        <form onSubmit={handleSubmit} className="flex items-center mt-2">
+          <span className="text-blue-400 mr-2 font-bold">❯</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="bg-transparent border-none outline-none flex-1 text-green-400 font-mono"
+            className="bg-transparent border-none outline-none flex-1 text-emerald-400 font-mono placeholder:text-slate-500 caret-emerald-400"
             autoComplete="off"
             placeholder="Type 'help' for commands..."
           />
+          <div className="w-2 h-5 bg-emerald-400 animate-pulse ml-1"></div>
         </form>
       </div>
+
+      {/* Terminal glow effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent"></div>
+      </div>
+
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(15, 23, 42, 0.5);
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(to bottom, #10b981, #065f46);
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to bottom, #34d399, #059669);
+        }
+      `}</style>
     </div>
   );
 };
