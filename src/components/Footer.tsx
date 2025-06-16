@@ -1,5 +1,6 @@
 
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,6 +13,21 @@ const Footer = () => {
             <p className="text-foreground/70">
               © {currentYear} John Doe. All rights reserved.
             </p>
+            <div className="flex space-x-4 mt-2">
+              <Link 
+                to="/privacy-policy" 
+                className="text-foreground/60 hover:text-primary transition-colors text-sm"
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-foreground/40">|</span>
+              <Link 
+                to="/terms-of-service" 
+                className="text-foreground/60 hover:text-primary transition-colors text-sm"
+              >
+                Terms of Service
+              </Link>
+            </div>
           </div>
           <div className="flex space-x-6">
             <a
