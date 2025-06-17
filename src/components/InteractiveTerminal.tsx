@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -192,15 +191,6 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
           <div className="w-3 h-3 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg shadow-red-500/30 ring-1 ring-red-300/20"></div>
           <div className="w-3 h-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg shadow-yellow-500/30 ring-1 ring-yellow-300/20"></div>
           <div className="w-3 h-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/30 ring-1 ring-green-300/20"></div>
-        </div>
-        <div className="flex items-center gap-2 ml-4">
-          <div className="w-4 h-4 text-slate-400">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-          </div>
-          <span className="text-slate-300 text-sm font-medium tracking-wider">mafdy@portfolio</span>
-          <span className="text-slate-500 text-sm">~</span>
         </div>
       </div>
 
