@@ -20,7 +20,7 @@ const Hero = () => {
       className="min-h-screen flex items-center pt-16 hero-gradient bg-size-200"
     >
       <div className="section-container">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-lg font-medium text-primary mb-2 animate-pulse">Hello, I'm</h2>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
@@ -41,8 +41,8 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <div className="hidden md:block floating-code">
-            <InteractiveTerminal />
+          <div className="floating-code mt-8 lg:mt-0">
+            <InteractiveTerminal className="w-full max-w-2xl mx-auto" />
           </div>
         </div>
       </div>

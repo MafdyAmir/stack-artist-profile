@@ -181,28 +181,28 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
 
   return (
     <div className={cn(
-      "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-emerald-400 rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl backdrop-blur-sm",
+      "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-emerald-400 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm",
       "relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-emerald-500/5 before:via-transparent before:to-blue-500/5 before:pointer-events-none",
       className
     )}>
       {/* Terminal Header */}
-      <div className="flex items-center gap-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 px-5 py-4 border-b border-slate-600/30 backdrop-blur-sm">
+      <div className="flex items-center gap-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 px-3 sm:px-5 py-3 sm:py-4 backdrop-blur-sm">
         <div className="flex gap-2">
-          <div className="w-3 h-3 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg shadow-red-500/30 ring-1 ring-red-300/20"></div>
-          <div className="w-3 h-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg shadow-yellow-500/30 ring-1 ring-yellow-300/20"></div>
-          <div className="w-3 h-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/30 ring-1 ring-green-300/20"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg shadow-red-500/30 ring-1 ring-red-300/20"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg shadow-yellow-500/30 ring-1 ring-yellow-300/20"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/30 ring-1 ring-green-300/20"></div>
         </div>
       </div>
 
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="p-6 h-80 overflow-y-auto font-mono text-sm leading-relaxed custom-scrollbar"
+        className="p-3 sm:p-6 h-64 sm:h-80 overflow-y-auto font-mono text-xs sm:text-sm leading-relaxed custom-scrollbar"
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((line, index) => (
           <div key={index} className={cn(
-            "mb-1.5 transition-all duration-200",
+            "mb-1.5 transition-all duration-200 break-words",
             line.type === 'command' && "text-cyan-300 font-medium",
             line.type === 'output' && "text-emerald-300 pl-2",
             line.type === 'system' && "text-amber-300 font-medium"
@@ -216,18 +216,18 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
         
         {/* Current Input Line */}
         <form onSubmit={handleSubmit} className="flex items-center mt-2">
-          <span className="text-blue-400 mr-2 font-bold">❯</span>
+          <span className="text-blue-400 mr-2 font-bold text-xs sm:text-sm">❯</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="bg-transparent border-none outline-none flex-1 text-emerald-400 font-mono placeholder:text-slate-500 caret-emerald-400"
+            className="bg-transparent border-none outline-none flex-1 text-emerald-400 font-mono placeholder:text-slate-500 caret-emerald-400 text-xs sm:text-sm"
             autoComplete="off"
             placeholder="Type 'help' for commands..."
           />
-          <div className="w-2 h-5 bg-emerald-400 animate-pulse ml-1"></div>
+          <div className="w-1.5 h-4 sm:w-2 sm:h-5 bg-emerald-400 animate-pulse ml-1"></div>
         </form>
       </div>
 
