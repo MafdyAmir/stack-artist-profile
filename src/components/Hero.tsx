@@ -44,7 +44,7 @@ const Hero = () => {
           <div className="hidden md:block floating-code">
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-primary/30 rounded-lg blur opacity-40 animate-pulse"></div>
-              <div className="relative bg-card p-6 rounded-lg shadow-xl border border-border/30">
+              <div className="relative bg-card p-6 rounded-lg">
                 <InteractiveTerminal />
               </div>
             </div>
