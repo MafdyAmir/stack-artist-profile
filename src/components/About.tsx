@@ -31,20 +31,20 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-10">
-          {/* Profile Image - Now taking more space */}
+          {/* Profile Image - Square format with responsive sizing */}
           <div className="lg:col-span-1 animate-on-scroll flex justify-center">
             <div className="relative group">
-              <Avatar className="w-64 h-64 md:w-80 md:h-80 ring-4 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
+              <Avatar className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-xl ring-4 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
                 <AvatarImage 
                   src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" 
                   alt="Mafdy - Backend Developer"
-                  className="object-cover"
+                  className="object-cover rounded-xl"
                 />
-                <AvatarFallback className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white">
+                <AvatarFallback className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white rounded-xl">
                   M
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           </div>
 
