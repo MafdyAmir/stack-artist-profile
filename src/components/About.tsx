@@ -1,6 +1,7 @@
 
 import { Database, Server, Code } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const features = [
   {
@@ -29,7 +30,25 @@ const About = () => {
       <div className="section-container">
         <h2 className="section-title">About Me</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mt-10">
+          {/* Profile Image */}
+          <div className="lg:col-span-1 animate-on-scroll flex justify-center lg:justify-start">
+            <div className="relative group">
+              <Avatar className="w-48 h-48 ring-4 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
+                <AvatarImage 
+                  src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face" 
+                  alt="Mafdy - Backend Developer"
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white">
+                  M
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </div>
+
+          {/* About Text */}
           <div className="lg:col-span-2 animate-on-scroll">
             <p className="text-lg text-foreground/80 mb-6">
               I'm a passionate backend developer with over 5 years of experience building robust server-side applications.
@@ -45,7 +64,8 @@ const About = () => {
             </p>
           </div>
           
-          <div className="animate-on-scroll">
+          {/* Skills/Approach */}
+          <div className="lg:col-span-1 animate-on-scroll">
             <h3 className="text-xl font-semibold mb-4">My Approach</h3>
             <ul className="space-y-6">
               {features.map((feature, index) => (
