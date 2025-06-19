@@ -30,17 +30,17 @@ const About = () => {
       <div className="section-container">
         <h2 className="section-title">About Me</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mt-10">
-          {/* Profile Image */}
-          <div className="lg:col-span-1 animate-on-scroll flex justify-center lg:justify-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-10">
+          {/* Profile Image - Now taking more space */}
+          <div className="lg:col-span-1 animate-on-scroll flex justify-center">
             <div className="relative group">
-              <Avatar className="w-48 h-48 ring-4 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
+              <Avatar className="w-64 h-64 md:w-80 md:h-80 ring-4 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
                 <AvatarImage 
-                  src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face" 
+                  src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" 
                   alt="Mafdy - Backend Developer"
                   className="object-cover"
                 />
-                <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white">
+                <AvatarFallback className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white">
                   M
                 </AvatarFallback>
               </Avatar>
@@ -48,40 +48,43 @@ const About = () => {
             </div>
           </div>
 
-          {/* About Text */}
-          <div className="lg:col-span-2 animate-on-scroll">
-            <p className="text-lg text-foreground/80 mb-6">
-              I'm a passionate backend developer with over 5 years of experience building robust server-side applications.
-              I specialize in creating efficient, scalable, and maintainable backend systems that power modern web applications.
-            </p>
-            <p className="text-lg text-foreground/80 mb-6">
-              My journey in software development started with a deep curiosity about how systems work behind the scenes.
-              This led me to focus on backend technologies, where I've developed expertise in Node.js, NestJS, and various database systems.
-            </p>
-            <p className="text-lg text-foreground/80">
-              I believe in writing clean, well-tested code that solves real business problems. My approach combines technical excellence with practical solutions,
-              ensuring that the systems I build are not only technically sound but also aligned with business goals.
-            </p>
-          </div>
-          
-          {/* Skills/Approach */}
-          <div className="lg:col-span-1 animate-on-scroll">
-            <h3 className="text-xl font-semibold mb-4">My Approach</h3>
-            <ul className="space-y-6">
-              {features.map((feature, index) => (
-                <li key={index} className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-primary-foreground">
-                      <feature.icon className="h-6 w-6" />
+          {/* About Text and Skills combined */}
+          <div className="lg:col-span-2 animate-on-scroll space-y-8">
+            {/* About Text */}
+            <div>
+              <p className="text-lg text-foreground/80 mb-6">
+                I'm a passionate backend developer with over 5 years of experience building robust server-side applications.
+                I specialize in creating efficient, scalable, and maintainable backend systems that power modern web applications.
+              </p>
+              <p className="text-lg text-foreground/80 mb-6">
+                My journey in software development started with a deep curiosity about how systems work behind the scenes.
+                This led me to focus on backend technologies, where I've developed expertise in Node.js, NestJS, and various database systems.
+              </p>
+              <p className="text-lg text-foreground/80">
+                I believe in writing clean, well-tested code that solves real business problems. My approach combines technical excellence with practical solutions,
+                ensuring that the systems I build are not only technically sound but also aligned with business goals.
+              </p>
+            </div>
+            
+            {/* Skills/Approach */}
+            <div>
+              <h3 className="text-xl font-semibold mb-6">My Approach</h3>
+              <ul className="space-y-6">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-primary-foreground">
+                        <feature.icon className="h-6 w-6" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="text-lg font-medium text-foreground">{feature.title}</h4>
-                    <p className="mt-2 text-base text-foreground/70">{feature.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                    <div className="ml-4">
+                      <h4 className="text-lg font-medium text-foreground">{feature.title}</h4>
+                      <p className="mt-2 text-base text-foreground/70">{feature.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
