@@ -1,7 +1,8 @@
 
-import { Database, Server, Code } from "lucide-react";
+import { Database, Server, Code, Download, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -64,6 +65,22 @@ const About = () => {
                 I believe in writing clean, well-tested code that solves real business problems. My approach combines technical excellence with practical solutions,
                 ensuring that the systems I build are not only technically sound but also aligned with business goals.
               </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-4 mt-8">
+              <Button size="lg" className="glow" asChild>
+                <a href="#contact">
+                  <Mail className="h-5 w-5 mr-2" />
+                  Contact Me
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="backdrop-blur-sm" asChild>
+                <a href="/resume.pdf" download>
+                  <Download className="h-5 w-5 mr-2" />
+                  Download CV
+                </a>
+              </Button>
             </div>
             
             {/* Skills/Approach with better visual hierarchy */}
