@@ -33,7 +33,7 @@ const About = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12">
           {/* Profile Image - Large and prominent */}
-          <div className="animate-on-scroll flex justify-center lg:justify-start">
+          <div className="animate-on-scroll flex flex-col items-center lg:items-start">
             <div className="relative group">
               <Avatar className="w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-2xl ring-6 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-[1.02]">
                 <AvatarImage 
@@ -46,6 +46,22 @@ const About = () => {
                 </AvatarFallback>
               </Avatar>
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            {/* Action Buttons under the image */}
+            <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
+              <Button size="lg" className="glow" asChild>
+                <a href="#contact">
+                  <Mail className="h-5 w-5 mr-2" />
+                  Contact Me
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="backdrop-blur-sm" asChild>
+                <a href="/resume.pdf" download>
+                  <Download className="h-5 w-5 mr-2" />
+                  Download CV
+                </a>
+              </Button>
             </div>
           </div>
 
@@ -65,22 +81,6 @@ const About = () => {
                 I believe in writing clean, well-tested code that solves real business problems. My approach combines technical excellence with practical solutions,
                 ensuring that the systems I build are not only technically sound but also aligned with business goals.
               </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 mt-8">
-              <Button size="lg" className="glow" asChild>
-                <a href="#contact">
-                  <Mail className="h-5 w-5 mr-2" />
-                  Contact Me
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" className="backdrop-blur-sm" asChild>
-                <a href="/resume.pdf" download>
-                  <Download className="h-5 w-5 mr-2" />
-                  Download CV
-                </a>
-              </Button>
             </div>
             
             {/* Skills/Approach with better visual hierarchy */}
