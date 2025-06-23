@@ -11,34 +11,37 @@ const features = [
     title: "Database Design",
     description:
       "Expertise in designing efficient database schemas for optimal performance and scalability.",
+    skills: [
+      { name: "MongoDB", color: "bg-green-600" },
+      { name: "PostgreSQL", color: "bg-blue-600" },
+      { name: "Redis", color: "bg-red-600" },
+    ]
   },
   {
     icon: Server,
     title: "API Development",
     description:
       "Building RESTful and GraphQL APIs that are secure, well-documented, and developer-friendly.",
+    skills: [
+      { name: "Node.js", color: "bg-green-500" },
+      { name: "NestJS", color: "bg-red-500" },
+      { name: "GraphQL", color: "bg-pink-500" },
+      { name: "REST API", color: "bg-indigo-500" },
+    ]
   },
   {
     icon: Code,
     title: "System Architecture",
     description:
       "Designing scalable backend systems that can handle high loads while maintaining reliability.",
+    skills: [
+      { name: "JavaScript", color: "bg-yellow-500" },
+      { name: "TypeScript", color: "bg-blue-500" },
+      { name: "Docker", color: "bg-cyan-500" },
+      { name: "AWS", color: "bg-orange-500" },
+      { name: "Git", color: "bg-gray-600" },
+    ]
   },
-];
-
-const skills = [
-  { name: "JavaScript", color: "bg-yellow-500" },
-  { name: "TypeScript", color: "bg-blue-500" },
-  { name: "Node.js", color: "bg-green-500" },
-  { name: "NestJS", color: "bg-red-500" },
-  { name: "MongoDB", color: "bg-green-600" },
-  { name: "PostgreSQL", color: "bg-blue-600" },
-  { name: "Docker", color: "bg-cyan-500" },
-  { name: "AWS", color: "bg-orange-500" },
-  { name: "GraphQL", color: "bg-pink-500" },
-  { name: "Redis", color: "bg-red-600" },
-  { name: "Git", color: "bg-gray-600" },
-  { name: "REST API", color: "bg-indigo-500" },
 ];
 
 const About = () => {
@@ -48,8 +51,8 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-12">
-          {/* Profile Image with Skills */}
-          <div className="animate-on-scroll flex flex-col items-center lg:items-start space-y-8">
+          {/* Profile Image */}
+          <div className="animate-on-scroll flex justify-center lg:justify-start">
             <div className="relative group">
               <Avatar className="w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-2xl ring-6 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-[1.02]">
                 <AvatarImage 
@@ -62,25 +65,6 @@ const About = () => {
                 </AvatarFallback>
               </Avatar>
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-
-            {/* Skills Badges */}
-            <div className="w-full max-w-md">
-              <h3 className="text-xl font-semibold mb-4 text-center lg:text-left">Technologies</h3>
-              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                {skills.map((skill, index) => (
-                  <Badge
-                    key={skill.name}
-                    className={cn(
-                      "text-white font-medium px-3 py-1 hover:scale-105 transition-transform duration-200",
-                      skill.color
-                    )}
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    {skill.name}
-                  </Badge>
-                ))}
-              </div>
             </div>
           </div>
 
@@ -131,7 +115,21 @@ const About = () => {
                     </div>
                     <div className="ml-6">
                       <h4 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h4>
-                      <p className="text-base text-foreground/70 leading-relaxed">{feature.description}</p>
+                      <p className="text-base text-foreground/70 leading-relaxed mb-3">{feature.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {feature.skills.map((skill, skillIndex) => (
+                          <Badge
+                            key={skill.name}
+                            className={cn(
+                              "text-white font-medium px-3 py-1 hover:scale-105 transition-transform duration-200",
+                              skill.color
+                            )}
+                            style={{ animationDelay: `${(index * feature.skills.length + skillIndex) * 50}ms` }}
+                          >
+                            {skill.name}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
