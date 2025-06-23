@@ -85,7 +85,7 @@ const About = () => {
       <div className="section-container">
         <h2 className="section-title">About Me</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mt-12">
           {/* Profile Image with Additional Skills */}
           <div className="animate-on-scroll flex flex-col items-center lg:items-start space-y-8">
             <div className="relative group">
