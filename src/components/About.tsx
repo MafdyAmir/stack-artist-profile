@@ -3,6 +3,7 @@ import { Database, Server, Code, Download, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const features = [
   {
@@ -25,6 +26,21 @@ const features = [
   },
 ];
 
+const skills = [
+  { name: "JavaScript", color: "bg-yellow-500" },
+  { name: "TypeScript", color: "bg-blue-500" },
+  { name: "Node.js", color: "bg-green-500" },
+  { name: "NestJS", color: "bg-red-500" },
+  { name: "MongoDB", color: "bg-green-600" },
+  { name: "PostgreSQL", color: "bg-blue-600" },
+  { name: "Docker", color: "bg-cyan-500" },
+  { name: "AWS", color: "bg-orange-500" },
+  { name: "GraphQL", color: "bg-pink-500" },
+  { name: "Redis", color: "bg-red-600" },
+  { name: "Git", color: "bg-gray-600" },
+  { name: "REST API", color: "bg-indigo-500" },
+];
+
 const About = () => {
   return (
     <section id="about" className="bg-secondary/30 py-16 md:py-24">
@@ -32,8 +48,8 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-12">
-          {/* Profile Image - Large and prominent */}
-          <div className="animate-on-scroll flex justify-center lg:justify-start">
+          {/* Profile Image with Skills */}
+          <div className="animate-on-scroll flex flex-col items-center lg:items-start space-y-8">
             <div className="relative group">
               <Avatar className="w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-2xl ring-6 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-[1.02]">
                 <AvatarImage 
@@ -46,6 +62,25 @@ const About = () => {
                 </AvatarFallback>
               </Avatar>
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            {/* Skills Badges */}
+            <div className="w-full max-w-md">
+              <h3 className="text-xl font-semibold mb-4 text-center lg:text-left">Technologies</h3>
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                {skills.map((skill, index) => (
+                  <Badge
+                    key={skill.name}
+                    className={cn(
+                      "text-white font-medium px-3 py-1 hover:scale-105 transition-transform duration-200",
+                      skill.color
+                    )}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
 
