@@ -1,8 +1,7 @@
-
 import { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
-import Projects from "@/components/Projects";
+import ProjectsPreview from "@/components/ProjectsPreview";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -84,7 +83,7 @@ const Index = () => {
       <Navbar />
       <Hero />
       <About />
-      <Projects />
+      <ProjectsPreview />
       <Skills />
       <Contact />
       <Footer />
