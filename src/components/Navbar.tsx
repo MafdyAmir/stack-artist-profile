@@ -1,16 +1,16 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +44,17 @@ const Navbar = () => {
   };
 
   const handleSectionClick = (sectionId: string) => {
-    console.log(`Navigating to section: ${sectionId}`);
-    if (location.pathname === "/") {
-      // If we're on the home page, scroll to section
+    if (location.pathname !== "/") {
+      // If not on home page, navigate to home first, then scroll
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If on home page, scroll to section
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -55,12 +63,21 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navLinks = [
-    { name: "Home", href: "/#home", section: "home" },
-    { name: "About", href: "/#about", section: "about" },
-    { name: "Projects", href: "/projects", section: "projects" },
-    { name: "Skills", href: "/#skills", section: "skills" },
-    { name: "Contact", href: "/#contact", section: "contact" },
+    { name: "Home", section: "home" },
+    { name: "About", section: "about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Skills", section: "skills" },
+    { name: "Contact", section: "contact" },
   ];
 
   const isProjectsPage = location.pathname.startsWith("/projects");
@@ -73,28 +90,26 @@ const Navbar = () => {
           ? "bg-background/80 backdrop-blur-md shadow-sm"
           : "bg-transparent"
       )}
-      style={{ position: 'fixed' }} // Ensure it stays fixed
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link 
-              to="/" 
-              className="text-xl font-bold relative group"
-              onClick={() => console.log('Logo clicked, navigating to home')}
+            <button 
+              onClick={handleLogoClick}
+              className="text-xl font-bold relative group cursor-pointer bg-transparent border-none"
             >
               <span className="relative z-10 animated-text">{"<MafdyAmir />"}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-            </Link>
+            </button>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
-              const isActive = isProjectsPage && link.section === "projects" 
+              const isActive = isProjectsPage && link.name === "Projects" 
                 ? true 
                 : !isProjectsPage && activeSection === link.section;
               
-              if (link.href.startsWith("/#") && location.pathname !== "/") {
+              if (link.href) {
                 return (
                   <Link
                     key={link.name}
@@ -105,25 +120,6 @@ const Navbar = () => {
                         ? "text-primary font-medium"
                         : "text-foreground hover:text-primary"
                     )}
-                    onClick={() => console.log(`Navigating to ${link.href}`)}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              }
-              
-              if (link.href.startsWith("/")) {
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className={cn(
-                      "nav-link transition-colors cursor-pointer",
-                      isActive
-                        ? "text-primary font-medium"
-                        : "text-foreground hover:text-primary"
-                    )}
-                    onClick={() => console.log(`Navigating to ${link.href}`)}
                   >
                     {link.name}
                   </Link>
@@ -172,29 +168,11 @@ const Navbar = () => {
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-background/90 backdrop-blur-md shadow-sm">
           {navLinks.map((link) => {
-            const isActive = isProjectsPage && link.section === "projects" 
+            const isActive = isProjectsPage && link.name === "Projects" 
               ? true 
               : !isProjectsPage && activeSection === link.section;
             
-            if (link.href.startsWith("/#") && location.pathname !== "/") {
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer",
-                    isActive
-                      ? "bg-primary/10 text-primary"
-                      : "hover:bg-accent hover:text-accent-foreground"
-                  )}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              );
-            }
-            
-            if (link.href.startsWith("/")) {
+            if (link.href) {
               return (
                 <Link
                   key={link.name}
