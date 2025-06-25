@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
@@ -42,6 +43,18 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleSectionClick = (sectionId: string) => {
+    console.log(`Navigating to section: ${sectionId}`);
+    if (location.pathname === "/") {
+      // If we're on the home page, scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   const navLinks = [
     { name: "Home", href: "/#home", section: "home" },
     { name: "About", href: "/#about", section: "about" },
@@ -60,11 +73,16 @@ const Navbar = () => {
           ? "bg-background/80 backdrop-blur-md shadow-sm"
           : "bg-transparent"
       )}
+      style={{ position: 'fixed' }} // Ensure it stays fixed
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="text-xl font-bold relative group">
+            <Link 
+              to="/" 
+              className="text-xl font-bold relative group"
+              onClick={() => console.log('Logo clicked, navigating to home')}
+            >
               <span className="relative z-10 animated-text">{"<MafdyAmir />"}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
@@ -82,11 +100,12 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     className={cn(
-                      "nav-link transition-colors",
+                      "nav-link transition-colors cursor-pointer",
                       isActive
                         ? "text-primary font-medium"
                         : "text-foreground hover:text-primary"
                     )}
+                    onClick={() => console.log(`Navigating to ${link.href}`)}
                   >
                     {link.name}
                   </Link>
@@ -99,11 +118,12 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     className={cn(
-                      "nav-link transition-colors",
+                      "nav-link transition-colors cursor-pointer",
                       isActive
                         ? "text-primary font-medium"
                         : "text-foreground hover:text-primary"
                     )}
+                    onClick={() => console.log(`Navigating to ${link.href}`)}
                   >
                     {link.name}
                   </Link>
@@ -111,18 +131,18 @@ const Navbar = () => {
               }
               
               return (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
+                  onClick={() => handleSectionClick(link.section)}
                   className={cn(
-                    "nav-link transition-colors",
+                    "nav-link transition-colors cursor-pointer bg-transparent border-none",
                     isActive
                       ? "text-primary font-medium"
                       : "text-foreground hover:text-primary"
                   )}
                 >
                   {link.name}
-                </a>
+                </button>
               );
             })}
             <ThemeToggle />
@@ -162,7 +182,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300",
+                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -180,7 +200,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300",
+                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -193,19 +213,18 @@ const Navbar = () => {
             }
             
             return (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
+                onClick={() => handleSectionClick(link.section)}
                 className={cn(
-                  "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300",
+                  "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer w-full text-left bg-transparent border-none",
                   isActive
                     ? "bg-primary/10 text-primary"
                     : "hover:bg-accent hover:text-accent-foreground"
                 )}
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </button>
             );
           })}
         </div>
