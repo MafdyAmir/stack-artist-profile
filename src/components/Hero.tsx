@@ -37,27 +37,34 @@ const Hero = () => {
       </div>
 
       <div className="section-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content Card */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-lg font-medium text-primary mb-2 animate-pulse hero-subtitle">Hello, I'm</h2>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 hero-title">
-              Mafdy
-            </h1>
-            <h3 className="text-2xl md:text-3xl mb-6 hero-role">
-              <span className="animated-text-enhanced">Backend Developer</span>
-            </h3>
-            <p className="text-lg text-foreground/70 mb-8 max-w-lg hero-description">
-              I build scalable, reliable and maintainable backend systems that power modern web applications.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="glow-enhanced hero-button" asChild>
-                <a href="#projects">View Projects</a>
-              </Button>
-              <Button size="lg" variant="outline" className="backdrop-blur-sm hero-button-outline" asChild>
-                <a href="#contact">Contact Me</a>
-              </Button>
+            <div className="hero-content-card">
+              <div className="hero-card-inner">
+                <h2 className="hero-greeting">Hello, I'm</h2>
+                <h1 className="hero-name">
+                  Mafdy
+                </h1>
+                <h3 className="hero-title">
+                  <span className="animated-text-enhanced">Backend Developer</span>
+                </h3>
+                <p className="hero-description">
+                  I build scalable, reliable and maintainable backend systems that power modern web applications.
+                </p>
+                <div className="hero-buttons">
+                  <Button size="lg" className="hero-primary-btn" asChild>
+                    <a href="#projects">View Projects</a>
+                  </Button>
+                  <Button size="lg" variant="outline" className="hero-secondary-btn" asChild>
+                    <a href="#contact">Contact Me</a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Terminal Section */}
           <div className="floating-code mt-8 lg:mt-0 relative z-20">
             <InteractiveTerminal className="w-full max-w-2xl mx-auto" />
           </div>
