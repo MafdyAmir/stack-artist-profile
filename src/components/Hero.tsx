@@ -53,10 +53,10 @@ const Hero = () => {
                   I build scalable, reliable and maintainable backend systems that power modern web applications.
                 </p>
                 <div className="hero-buttons">
-                  <Button size="lg" className="hero-primary-btn" asChild>
+                  <Button size="lg" className="hero-primary-btn duration-500 transition-all"  asChild>
                     <a href="#projects">View Projects</a>
                   </Button>
-                  <Button size="lg" variant="outline" className="hero-secondary-btn" asChild>
+                  <Button size="lg" variant="outline" className="hero-secondary-btn duration-500 transition-all" asChild>
                     <a href="#contact">Contact Me</a>
                   </Button>
                 </div>

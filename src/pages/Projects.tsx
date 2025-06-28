@@ -4,7 +4,8 @@ import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { projects, getProjectsByCategory } from "@/data/projects";
+import { getProjectsByCategory } from "@/data/projects";
+import Footer from "@/components/Footer";
 
 const Projects = () => {
   const [filter, setFilter] = useState<string>("all");
@@ -33,6 +34,7 @@ const Projects = () => {
   };
 
   return (
+    <>
     <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Link 
@@ -173,6 +175,8 @@ const Projects = () => {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
