@@ -44,7 +44,7 @@ const Hero = () => {
               <div className="hero-card-inner">
                 <h2 className="hero-greeting">Hello, I'm</h2>
                 <h1 className="hero-name">
-                  Mafdy
+                  MafdyAmir
                 </h1>
                 <h3 className="hero-title">
                   <span className="animated-text-enhanced">Backend Developer</span>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
+
 import About from "@/components/About";
 import ProjectsPreview from "@/components/ProjectsPreview";
 import Skills from "@/components/Skills";
@@ -80,7 +80,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">
       <ScrollProgress />
-      <Navbar />
+      
       <Hero />
       <About />
       <ProjectsPreview />

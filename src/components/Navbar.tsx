@@ -85,7 +85,7 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "navbar-fixed transition-all duration-500",
+        "transition-all duration-500",
         isScrolled
           ? "bg-background/80 backdrop-blur-md shadow-sm"
           : "bg-transparent"
@@ -99,7 +99,7 @@ const Navbar = () => {
               className="text-xl font-bold relative group cursor-pointer bg-transparent border-none"
             >
               <span className="relative z-10 animated-text">{"<MafdyAmir />"}</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+              {/* <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span> */}
             </button>
           </div>
           
