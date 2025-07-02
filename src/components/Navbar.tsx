@@ -16,9 +16,9 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
       
-      // Only update active section on home page
-      if (location.pathname === "/") {
-        const sections = ["home", "about", "projects", "skills", "contact"];
+        // Only update active section on home page
+        if (location.pathname === "/") {
+          const sections = ["home", "about", "projects", "skills", "testimonials", "contact"];
         const sectionElements = sections.map(id => document.getElementById(id));
         
         const currentSectionIndex = sectionElements.findIndex((section, index) => {
@@ -77,6 +77,7 @@ const Navbar = () => {
     { name: "About", section: "about" },
     { name: "Projects", href: "/projects" },
     { name: "Skills", section: "skills" },
+    { name: "Testimonials", section: "testimonials" },
     { name: "Contact", section: "contact" },
   ];
 

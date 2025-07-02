@@ -58,7 +58,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 md:py-28 bg-background">
+    <section id="testimonials" className="py-20 md:py-28 bg-background">
       <div className="section-container">
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="section-title">What Clients Say</h2>
