@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import About from "@/components/About";
 import ProjectsPreview from "@/components/ProjectsPreview";
 import Skills from "@/components/Skills";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -85,6 +86,7 @@ const Index = () => {
       <About />
       <ProjectsPreview />
       <Skills />
+      <Testimonials />
       <Contact />
       <Footer />
     </div>
