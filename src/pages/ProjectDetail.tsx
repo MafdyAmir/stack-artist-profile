@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, ExternalLink, Github, CheckCircle, Lightbulb, Target } from "lucide-react";
+import { ArrowLeft, Calendar, ExternalLink, Github, CheckCircle, Code, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,11 +12,11 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-          <p className="text-xl text-muted-foreground mb-8">
-            The project you're looking for doesn't exist.
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-6">
+          <h1 className="text-3xl font-bold text-foreground">Project Not Found</h1>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            The project you're looking for doesn't exist or has been moved.
           </p>
           <Link to="/projects">
             <Button>
@@ -29,223 +29,214 @@ const ProjectDetail = () => {
     );
   }
 
-  const getStatusColor = (status: string) => {
+  const getStatusVariant = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+        return 'default';
       case 'in-progress':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+        return 'secondary';
       case 'planned':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
+        return 'outline';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
+        return 'outline';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
-      {/* Hero Section with Enhanced Design */}
-      <div className="relative">
-        {project.imageUrl && (
-          <div className="relative h-80 md:h-96 overflow-hidden">
-            <img 
-              src={project.imageUrl} 
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
-            <Badge 
-              className={`absolute top-6 right-6 text-sm px-3 py-1 font-medium ${getStatusColor(project.status)}`}
-            >
-              {project.status.replace('-', ' ').toUpperCase()}
-            </Badge>
-          </div>
-        )}
-        
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12">
-          <div className="max-w-4xl mx-auto w-full">
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <Link 
-              to="/projects" 
-              className="inline-flex items-center text-white/90 hover:text-white transition-colors mb-6 bg-black/20 backdrop-blur-sm rounded-lg px-4 py-2"
+              to="/projects"
+              className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Projects
             </Link>
+            <Badge variant={getStatusVariant(project.status)} className="capitalize">
+              {project.status.replace('-', ' ')}
+            </Badge>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-b from-muted/50 to-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+              {project.title}
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl">
+              {project.fullDescription}
+            </p>
             
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div className="flex-1">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
-                  {project.title}
-                </h1>
-                <p className="text-xl text-white/90 mb-6 max-w-3xl drop-shadow-md">
-                  {project.fullDescription}
-                </p>
-                
-                <div className="flex items-center text-white/80 mb-6">
-                  <Calendar className="h-5 w-5 mr-2" />
-                  <span className="bg-black/20 backdrop-blur-sm px-3 py-1 rounded-lg">
-                    {new Date(project.startDate).toLocaleDateString('en-US', { 
+            <div className="flex items-center text-sm text-muted-foreground mb-8">
+              <Calendar className="h-4 w-4 mr-2" />
+              <span>
+                {new Date(project.startDate).toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'long'
+                })}
+                {project.endDate && (
+                  <>
+                    {' - '}
+                    {new Date(project.endDate).toLocaleDateString('en-US', { 
                       year: 'numeric', 
-                      month: 'long',
-                      day: 'numeric'
+                      month: 'long'
                     })}
-                    {project.endDate && (
-                      <>
-                        {' - '}
-                        {new Date(project.endDate).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long',
-                          day: 'numeric' 
-                        })}
-                      </>
-                    )}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="group bg-white text-black hover:bg-white/90" asChild>
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
-                    View Code
+                  </>
+                )}
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" asChild>
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github className="h-5 w-5 mr-2" />
+                  View Source
+                </a>
+              </Button>
+              {project.demoUrl && (
+                <Button size="lg" variant="outline" asChild>
+                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-5 w-5 mr-2" />
+                    Live Demo
                   </a>
                 </Button>
-                {project.demoUrl && (
-                  <Button size="lg" variant="outline" className="group border-white/30 text-white hover:bg-white/10" asChild>
-                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                      <span>Live Demo</span>
-                      <ExternalLink className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </Button>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Content Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-8 relative z-10">
-
-        {/* Tech Stack with Enhanced Design */}
-        <Card className="mb-12 shadow-lg border-0 bg-card/50 backdrop-blur-sm">
-          <CardHeader className="pb-6">
-            <CardTitle className="flex items-center text-2xl">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mr-3">
-                <Target className="h-5 w-5 text-primary" />
-              </div>
-              Technology Stack
-            </CardTitle>
-            <CardDescription className="text-base text-muted-foreground">
-              Technologies and frameworks used in this project
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-3">
-              {project.techStack.map((tech, index) => (
-                <Badge 
-                  key={index} 
-                  variant="secondary" 
-                  className="text-sm px-4 py-2 bg-gradient-to-r from-primary/10 to-primary/5 text-primary border border-primary/20 hover:bg-primary/20 transition-all duration-300 hover:scale-105 font-medium"
-                >
-                  {tech}
-                </Badge>
-              ))}
+      {/* Project Image */}
+      {project.imageUrl && (
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-lg overflow-hidden shadow-2xl">
+              <img 
+                src={project.imageUrl} 
+                alt={project.title}
+                className="w-full h-64 md:h-96 object-cover"
+              />
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </section>
+      )}
 
-        {/* Features with Enhanced Design */}
-        <Card className="mb-12 shadow-lg border-0 bg-card/50 backdrop-blur-sm">
-          <CardHeader className="pb-6">
-            <CardTitle className="flex items-center text-2xl">
-              <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mr-3">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-              </div>
-              Key Features
-            </CardTitle>
-            <CardDescription className="text-base text-muted-foreground">
-              Main functionalities and capabilities implemented in this project
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.features.map((feature, index) => (
-                <div key={index} className="flex items-start p-4 rounded-lg bg-green-500/5 border border-green-500/10 hover:bg-green-500/10 transition-colors duration-300">
-                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+      {/* Content */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-12">
+              
+              {/* Technology Stack */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Code className="h-5 w-5 mr-2 text-primary" />
+                    Technology Stack
+                  </CardTitle>
+                  <CardDescription>
+                    Technologies and tools used in this project
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech, index) => (
+                      <Badge key={index} variant="secondary">
+                        {tech}
+                      </Badge>
+                    ))}
                   </div>
-                  <span className="text-sm leading-relaxed font-medium">{feature}</span>
-                </div>
-              ))}
+                </CardContent>
+              </Card>
+
+              {/* Key Features */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <CheckCircle className="h-5 w-5 mr-2 text-primary" />
+                    Key Features
+                  </CardTitle>
+                  <CardDescription>
+                    Main functionalities implemented in this project
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {project.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 mr-3 mt-0.5 text-primary flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
-          </CardContent>
-        </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Challenges with Enhanced Design */}
-          <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center text-xl">
-                <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mr-3">
-                  <Target className="h-5 w-5 text-orange-500" />
-                </div>
-                Challenges Overcome
-              </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">
-                Technical challenges faced and solutions implemented
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {project.challenges.map((challenge, index) => (
-                  <div key={index} className="flex items-start p-4 rounded-lg bg-orange-500/5 border border-orange-500/10 hover:bg-orange-500/10 transition-colors duration-300">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full mr-3 mt-2 flex-shrink-0" />
-                    <span className="text-sm leading-relaxed">{challenge}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+            {/* Sidebar */}
+            <div className="space-y-8">
+              
+              {/* Challenges */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-lg">
+                    <Wrench className="h-4 w-4 mr-2 text-primary" />
+                    Challenges
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {project.challenges.map((challenge, index) => (
+                      <li key={index} className="text-sm text-muted-foreground">
+                        {challenge}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
 
-          {/* Learnings with Enhanced Design */}
-          <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center text-xl">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center mr-3">
-                  <Lightbulb className="h-5 w-5 text-blue-500" />
-                </div>
-                Key Learnings
-              </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">
-                Skills and knowledge gained from this project
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {project.learnings.map((learning, index) => (
-                  <div key={index} className="flex items-start p-4 rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors duration-300">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-3 mt-2 flex-shrink-0" />
-                    <span className="text-sm leading-relaxed">{learning}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Enhanced Navigation */}
-        <div className="mt-16 pt-12 border-t border-border/50">
-          <div className="flex justify-center">
-            <Link to="/projects">
-              <Button variant="outline" size="lg" className="group px-8 py-3 text-base font-medium hover:bg-primary/5 hover:border-primary/30 transition-all duration-300">
-                <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-                View All Projects
-              </Button>
-            </Link>
+              {/* Key Learnings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-lg">
+                    <CheckCircle className="h-4 w-4 mr-2 text-primary" />
+                    Learnings
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {project.learnings.map((learning, index) => (
+                      <li key={index} className="text-sm text-muted-foreground">
+                        {learning}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Footer Navigation */}
+      <section className="py-16 border-t">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Link to="/projects">
+            <Button variant="outline" size="lg">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              View All Projects
+            </Button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };
