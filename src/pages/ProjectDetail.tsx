@@ -70,34 +70,59 @@ const ProjectDetail = () => {
         </div>
       </nav>
 
-      {/* Hero Section with Featured Card */}
-      <section className="relative py-16 bg-slate-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-              {project.title}
-            </h1>
+      {/* Hero Section */}
+      <section className="relative py-12 bg-slate-950">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Project Title Header */}
+          <div className="text-center mb-8">
+            <div className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl p-8 mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                {project.title}
+              </h1>
+              <p className="text-xl text-white/90 mt-4">
+                {project.category.charAt(0).toUpperCase() + project.category.slice(1)} Project
+              </p>
+            </div>
           </div>
 
-          {/* Featured Project Card */}
-          <div className="relative">
-            <div className="bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl p-12 shadow-2xl">
-              <div className="flex flex-col lg:flex-row items-center gap-12">
-                <div className="lg:w-1/2 text-center lg:text-left">
-                  <div className="mb-6">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-xl mb-4">
-                      <Code className="h-10 w-10 text-white" />
-                    </div>
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                    {project.title}
-                  </h2>
-                  <p className="text-xl text-white/90 mb-6 leading-relaxed">
-                    {project.fullDescription}
-                  </p>
-                  <div className="flex items-center justify-center lg:justify-start text-white/80 mb-8">
+          {/* Main Project Card */}
+          <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+            {/* Project Image */}
+            {project.imageUrl && (
+              <div className="relative h-64 md:h-80 bg-gradient-to-br from-gray-100 to-gray-200">
+                <img 
+                  src={project.imageUrl} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-4 right-4">
+                  <Badge 
+                    variant={getStatusVariant(project.status)} 
+                    className="bg-white/90 text-slate-800 border-0 shadow-md"
+                  >
+                    {project.status.replace('-', ' ')}
+                  </Badge>
+                </div>
+              </div>
+            )}
+
+            {/* Project Content */}
+            <div className="p-8">
+              {/* Project Description */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Project Overview</h2>
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {project.fullDescription}
+                </p>
+              </div>
+
+              {/* Project Details */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Project Timeline</h3>
+                  <div className="flex items-center text-gray-600">
                     <Calendar className="h-5 w-5 mr-2" />
-                    <span className="text-lg">
+                    <span>
                       {new Date(project.startDate).toLocaleDateString('en-US', { 
                         year: 'numeric', 
                         month: 'long'
@@ -113,48 +138,34 @@ const ProjectDetail = () => {
                       )}
                     </span>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Project Links</h3>
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <Button 
-                      size="lg" 
-                      className="bg-white text-orange-600 hover:bg-white/90 font-semibold"
+                      size="sm" 
+                      className="bg-gray-900 hover:bg-gray-800 text-white"
                       asChild
                     >
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-5 w-5 mr-2" />
+                        <Github className="h-4 w-4 mr-2" />
                         View Source
                       </a>
                     </Button>
                     {project.demoUrl && (
                       <Button 
-                        size="lg" 
+                        size="sm" 
                         variant="outline" 
-                        className="border-white/30 text-white hover:bg-white/10"
+                        className="border-gray-300 text-gray-700 hover:bg-gray-50"
                         asChild
                       >
                         <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-5 w-5 mr-2" />
+                          <ExternalLink className="h-4 w-4 mr-2" />
                           Live Demo
                         </a>
                       </Button>
                     )}
                   </div>
-                </div>
-                <div className="lg:w-1/2">
-                  <Badge 
-                    variant={getStatusVariant(project.status)} 
-                    className="mb-4 text-lg px-4 py-2 bg-white/20 text-white border-white/30"
-                  >
-                    {project.status.replace('-', ' ')}
-                  </Badge>
-                  {project.imageUrl && (
-                    <div className="rounded-xl overflow-hidden shadow-xl">
-                      <img 
-                        src={project.imageUrl} 
-                        alt={project.title}
-                        className="w-full h-64 lg:h-80 object-cover"
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
