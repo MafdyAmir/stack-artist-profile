@@ -5,7 +5,7 @@ import ProjectsPreview from "@/components/ProjectsPreview";
 import Skills from "@/components/Skills";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
-
+import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 
@@ -88,7 +88,7 @@ const Index = () => {
       <Skills />
       <Testimonials />
       <Contact />
-
+      <Footer />
     </div>
   );
 };
