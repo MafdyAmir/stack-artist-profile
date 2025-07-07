@@ -54,11 +54,23 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 animate-on-scroll flex justify-center">
               <div className="relative group">
-                <Avatar className="w-80 h-80 md:w-96 md:h-96 rounded-2xl ring-8 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
-                  <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" alt="Mafdy - Backend Developer" className="object-cover rounded-2xl" />
-                  <AvatarFallback className="text-8xl md:text-9xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white rounded-2xl">M</AvatarFallback>
-                </Avatar>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative">
+                  <Avatar className="w-80 h-80 md:w-96 md:h-96 rounded-2xl">
+                    <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" alt="Mafdy - Backend Developer" className="object-cover rounded-2xl" />
+                    <AvatarFallback className="text-8xl md:text-9xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white rounded-2xl">M</AvatarFallback>
+                  </Avatar>
+                  {/* Colored border frame */}
+                  <div className="absolute inset-0 rounded-2xl border-4 border-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 p-1">
+                    <div className="w-full h-full rounded-xl bg-background"></div>
+                  </div>
+                  {/* Image container with higher z-index */}
+                  <div className="absolute inset-1 rounded-xl overflow-hidden">
+                    <Avatar className="w-full h-full">
+                      <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" alt="Mafdy - Backend Developer" className="object-cover w-full h-full" />
+                      <AvatarFallback className="text-8xl md:text-9xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white w-full h-full flex items-center justify-center">M</AvatarFallback>
+                    </Avatar>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="lg:col-span-3 animate-on-scroll space-y-6">
