@@ -209,83 +209,64 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* Challenges and Key Learnings */}
       <section className="py-16 bg-slate-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-8">Benefits (Achieved through Implementation)</h2>
-          
-          <div className="space-y-6">
-            <div className="flex items-start space-x-3">
-              <span className="inline-block w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">Enhanced User Experience</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  The implementation provides users with an intuitive and responsive interface that works seamlessly across all devices.
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Challenges */}
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Wrench className="h-6 w-6 text-orange-500 mr-3" />
+                Challenges
+              </h2>
+              <div className="space-y-4">
+                <ul className="space-y-3 text-slate-300">
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Scaling WebSocket connections
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Implementing message delivery guarantees
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Managing connection state across multiple servers
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Optimizing database queries for chat history
+                  </li>
+                </ul>
               </div>
             </div>
-            
-            <div className="flex items-start space-x-3">
-              <span className="inline-block w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">Improved Performance & Reliability</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  Built with modern technologies and best practices, ensuring fast load times and reliable functionality.
-                </p>
+
+            {/* Key Learnings */}
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <CheckCircle className="h-6 w-6 text-blue-500 mr-3" />
+                Key Learnings
+              </h2>
+              <div className="space-y-4">
+                <ul className="space-y-3 text-slate-300">
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    WebSocket scaling patterns
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Redis pub/sub for distributed systems
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    NestJS advanced features and decorators
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Real-time application architecture
+                  </li>
+                </ul>
               </div>
-            </div>
-            
-            <div className="flex items-start space-x-3">
-              <span className="inline-block w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">Scalable Architecture</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  The codebase is structured to allow for easy maintenance, updates, and future feature additions.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-3">
-              <span className="inline-block w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">Cross-Platform Compatibility</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  Ensures consistent functionality and appearance across different browsers and devices.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-12 text-center">
-            <p className="text-slate-300 mb-8 text-lg max-w-4xl mx-auto">
-              This implementation successfully demonstrates modern web development practices, creating a valuable 
-              digital solution that meets all specified requirements and delivers an exceptional user experience.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-                asChild
-              >
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                  <Github className="h-5 w-5 mr-2" />
-                  View Project Source
-                </a>
-              </Button>
-              {project.demoUrl && (
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-slate-600 text-slate-300 hover:bg-slate-800"
-                  asChild
-                >
-                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-5 w-5 mr-2" />
-                    Try Live Demo
-                  </a>
-                </Button>
-              )}
             </div>
           </div>
         </div>
