@@ -12,14 +12,14 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-6">
-          <h1 className="text-3xl font-bold text-white">Project Not Found</h1>
-          <p className="text-slate-300 max-w-md mx-auto">
+          <h1 className="text-3xl font-bold text-foreground">Project Not Found</h1>
+          <p className="text-muted-foreground max-w-md mx-auto">
             The project you're looking for doesn't exist or has been moved.
           </p>
           <Link to="/projects">
-            <Button className="bg-amber-500 hover:bg-amber-600 text-white">
+            <Button>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Projects
             </Button>
@@ -43,15 +43,15 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <section className="bg-slate-900 py-16">
+      <section className="bg-background py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               {project.title}
             </h1>
-            <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               {project.fullDescription}
             </p>
           </div>
@@ -59,10 +59,10 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Image/Media Section */}
-      <section className="py-12 bg-slate-900">
+      <section className="py-12 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {project.imageUrl && (
-            <div className="relative rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+            <div className="relative rounded-xl overflow-hidden bg-card border border-border">
               <img 
                 src={project.imageUrl} 
                 alt={project.title}
@@ -71,7 +71,7 @@ const ProjectDetail = () => {
               <div className="absolute top-4 right-4">
                 <Badge 
                   variant={getStatusVariant(project.status)} 
-                  className="bg-white/90 text-slate-800 border-0 shadow-md"
+                  className="shadow-md"
                 >
                   {project.status.replace('-', ' ')}
                 </Badge>
@@ -82,18 +82,18 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Overview */}
-      <section className="py-16 bg-slate-900">
+      <section className="py-16 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-8">Project Overview</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-8">Project Overview</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <p className="text-muted-foreground leading-relaxed text-lg">
                 {project.fullDescription}
               </p>
               
               {/* Project Timeline and Links */}
               <div className="space-y-4">
-                <div className="flex items-center text-slate-300">
+                <div className="flex items-center text-muted-foreground">
                   <Calendar className="h-5 w-5 mr-3" />
                   <span>
                     {new Date(project.startDate).toLocaleDateString('en-US', { 
@@ -115,7 +115,6 @@ const ProjectDetail = () => {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button 
                     size="sm" 
-                    className="bg-blue-600 hover:bg-blue-700 text-white"
                     asChild
                   >
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -127,7 +126,6 @@ const ProjectDetail = () => {
                     <Button 
                       size="sm" 
                       variant="outline" 
-                      className="border-slate-600 text-slate-300 hover:bg-slate-800"
                       asChild
                     >
                       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
@@ -142,12 +140,12 @@ const ProjectDetail = () => {
             
             {/* Technology Stack */}
             <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Technology Stack</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-4">Technology Stack</h3>
               <div className="flex flex-wrap gap-3">
                 {project.techStack.map((tech, index) => (
                   <Badge 
                     key={index} 
-                    className="bg-slate-800 text-slate-200 border-slate-600 hover:bg-slate-700"
+                    variant="secondary"
                   >
                     {tech}
                   </Badge>
@@ -159,28 +157,28 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Objective */}
-      <section className="py-16 bg-slate-900">
+      <section className="py-16 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-8">Project Objective</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-8">Project Objective</h2>
           <div className="space-y-6">
-            <p className="text-slate-300 leading-relaxed text-lg">
+            <p className="text-muted-foreground leading-relaxed text-lg">
               The primary objective was to develop a fully functional, responsive, and easy-to-navigate {project.category} project based on the provided requirements. The goal was to:
             </p>
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-3 text-muted-foreground">
               <li className="flex items-start">
-                <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
                 Faithfully implement the technical requirements and design specifications
               </li>
               <li className="flex items-start">
-                <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
                 Create a robust and maintainable codebase using modern technologies
               </li>
               <li className="flex items-start">
-                <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
                 Ensure optimal performance and user experience across all devices
               </li>
               <li className="flex items-start">
-                <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
                 Implement industry best practices for code organization and documentation
               </li>
             </ul>
@@ -189,10 +187,10 @@ const ProjectDetail = () => {
       </section>
 
       {/* Key Features */}
-      <section className="py-16 bg-slate-900">
+      <section className="py-16 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-8">Key Features (Implemented)</h2>
-          <p className="text-slate-300 mb-8 text-lg">
+          <h2 className="text-3xl font-bold text-foreground mb-8">Key Features (Implemented)</h2>
+          <p className="text-muted-foreground mb-8 text-lg">
             Based on the project requirements, the following features were implemented using modern web technologies:
           </p>
           
@@ -201,7 +199,7 @@ const ProjectDetail = () => {
               <div key={index} className="flex items-start space-x-3">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-slate-300 leading-relaxed">{feature}</p>
+                  <p className="text-muted-foreground leading-relaxed">{feature}</p>
                 </div>
               </div>
             ))}
@@ -210,17 +208,17 @@ const ProjectDetail = () => {
       </section>
 
       {/* Challenges and Key Learnings */}
-      <section className="py-16 bg-slate-900">
+      <section className="py-16 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Challenges */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center">
                 <Wrench className="h-6 w-6 text-orange-500 mr-3" />
                 Challenges
               </h2>
               <div className="space-y-4">
-                <ul className="space-y-3 text-slate-300">
+                <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                     Scaling WebSocket connections
@@ -243,12 +241,12 @@ const ProjectDetail = () => {
 
             {/* Key Learnings */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center">
                 <CheckCircle className="h-6 w-6 text-blue-500 mr-3" />
                 Key Learnings
               </h2>
               <div className="space-y-4">
-                <ul className="space-y-3 text-slate-300">
+                <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                     WebSocket scaling patterns
@@ -273,13 +271,12 @@ const ProjectDetail = () => {
       </section>
 
       {/* Navigation */}
-      <section className="py-16 border-t border-slate-800 bg-slate-900">
+      <section className="py-16 border-t border-border bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Link to="/projects">
             <Button 
               variant="outline" 
               size="lg"
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               View All Projects
