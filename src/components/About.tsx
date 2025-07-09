@@ -53,12 +53,11 @@ const About = () => {
           {/* About Me: Image and Text */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 animate-on-scroll flex justify-center">
-              <div className="relative group">
-                <Avatar className="w-80 h-80 md:w-96 md:h-96 rounded-2xl ring-8 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40 group-hover:scale-105">
-                  <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=600&fit=crop&crop=face" alt="Mafdy - Backend Developer" className="object-cover rounded-2xl" />
+              <div className="glowing-border">
+                <Avatar className="w-80 h-80 md:w-96 md:h-96 rounded-2xl">
+                  <AvatarImage src="profile_Image.jpg" alt="Mafdy - Backend Developer" className="object-cover rounded-2xl" />
                   <AvatarFallback className="text-8xl md:text-9xl font-bold bg-gradient-to-br from-primary to-primary/70 text-white rounded-2xl">M</AvatarFallback>
                 </Avatar>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </div>
             <div className="lg:col-span-3 animate-on-scroll space-y-6">

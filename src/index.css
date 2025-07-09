@@ -399,6 +399,13 @@
     animation: orb-float 15s ease-in-out infinite;
   }
 
+  .glowing-border {
+    border-radius: 1.5rem; /* Corresponds to rounded-2xl */
+    padding: 4px; /* Border thickness */
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary) / 0.4), hsl(var(--primary)));
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
   .orb-1 {
     width: 300px;
     height: 300px;
