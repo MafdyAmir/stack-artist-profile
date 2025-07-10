@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface TerminalLine {
   type: 'command' | 'output' | 'system';
@@ -9,6 +10,7 @@ interface TerminalLine {
 
 const InteractiveTerminal = ({ className }: { className?: string }) => {
   const [input, setInput] = useState('');
+  const reducedMotion = useReducedMotion();
   const [history, setHistory] = useState<TerminalLine[]>([
     { type: 'system', content: '$ whoami' },
     { type: 'output', content: 'Mafdy - Backend Developer' },
@@ -202,7 +204,8 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
       >
         {history.map((line, index) => (
           <div key={index} className={cn(
-            "mb-1.5 transition-all duration-200 break-words",
+            "mb-1.5 break-words",
+            reducedMotion ? "" : "transition-all duration-200",
             line.type === 'command' && "text-cyan-300 font-medium",
             line.type === 'output' && "text-emerald-300 pl-2",
             line.type === 'system' && "text-amber-300 font-medium"
@@ -227,7 +230,7 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
             autoComplete="off"
             placeholder="Type 'help' for commands..."
           />
-          <div className="w-1.5 h-4 sm:w-2 sm:h-5 bg-emerald-400 animate-pulse ml-1"></div>
+          <div className={`w-1.5 h-4 sm:w-2 sm:h-5 bg-emerald-400 ml-1 ${reducedMotion ? '' : 'animate-pulse'}`}></div>
         </form>
       </div>
 

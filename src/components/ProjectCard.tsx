@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export interface ProjectCardProps {
   title: string;
@@ -26,6 +27,7 @@ const ProjectCard = ({
   imageUrl,
 }: ProjectCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const reducedMotion = useReducedMotion();
   
   const toggleExpand = () => setIsExpanded(!isExpanded);
   
@@ -50,7 +52,7 @@ const ProjectCard = ({
         </CardTitle>
         <div className="flex flex-wrap gap-2 mt-2">
           {techStack.slice(0, 3).map((tech, index) => (
-            <Badge key={index} variant="outline" className="bg-primary/5 text-xs transition-all duration-300 hover:bg-primary/10">
+            <Badge key={index} variant="outline" className={`bg-primary/5 text-xs ${reducedMotion ? '' : 'transition-all duration-300 hover:bg-primary/10'}`}>
               {tech}
             </Badge>
           ))}
@@ -60,7 +62,12 @@ const ProjectCard = ({
             </Badge>
           )}
           {isExpanded && techStack.slice(3).map((tech, index) => (
-            <Badge key={`extra-${index}`} variant="outline" className="bg-primary/5 text-xs animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+            <Badge 
+              key={`extra-${index}`} 
+              variant="outline" 
+              className={`bg-primary/5 text-xs ${reducedMotion ? '' : 'animate-fade-in'}`} 
+              style={reducedMotion ? {} : { animationDelay: `${index * 50}ms` }}
+            >
               {tech}
             </Badge>
           ))}
@@ -68,7 +75,8 @@ const ProjectCard = ({
       </CardHeader>
       <CardContent className="flex-grow pb-3">
         <CardDescription className={cn(
-          "text-sm text-foreground/70 transition-all duration-300",
+          "text-sm text-foreground/70",
+          reducedMotion ? "" : "transition-all duration-300",
           isExpanded ? "line-clamp-none" : "line-clamp-3"
         )}>
           {description}
@@ -77,7 +85,7 @@ const ProjectCard = ({
       <CardFooter className="flex justify-between pt-3 border-t border-border/30">
         <Button variant="outline" size="sm" className="group" asChild>
           <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-            <Github className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
+            <Github className={`h-4 w-4 mr-2 ${reducedMotion ? '' : 'group-hover:rotate-12 transition-transform'}`} />
             Code
           </a>
         </Button>
@@ -85,7 +93,7 @@ const ProjectCard = ({
           <Button size="sm" className="group" asChild>
             <a href={demoUrl} target="_blank" rel="noopener noreferrer">
               <span>Demo</span>
-              <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              <ExternalLink className={`h-4 w-4 ml-2 ${reducedMotion ? '' : 'group-hover:translate-x-1 transition-transform'}`} />
             </a>
           </Button>
         )}

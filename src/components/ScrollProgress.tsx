@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const ScrollProgress = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const updateScrollProgress = () => {
@@ -22,7 +24,7 @@ const ScrollProgress = () => {
   return (
     <div className="scroll-progress-bar">
       <div
-        className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-200 ease-out"
+        className={`h-full bg-gradient-to-r from-primary to-primary/80 ${reducedMotion ? '' : 'transition-all duration-200 ease-out'}`}
         style={{ width: `${scrollProgress}%` }}
       />
     </div>

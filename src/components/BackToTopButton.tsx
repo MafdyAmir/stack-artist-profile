@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
@@ -17,7 +19,7 @@ const BackToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: reducedMotion ? 'auto' : 'smooth',
     });
   };
 
@@ -35,7 +37,8 @@ const BackToTopButton = () => {
       size="icon"
       onClick={scrollToTop}
       className={cn(
-        'fixed bottom-8 right-8 rounded-full h-12 w-12 z-50 transition-opacity duration-300',
+        'fixed bottom-8 right-8 rounded-full h-12 w-12 z-50',
+        reducedMotion ? '' : 'transition-opacity duration-300',
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
       aria-label="Scroll to top"
