@@ -81,8 +81,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">
       <ScrollProgress />
-      
       <Hero />
+      
       <About />
       <ProjectsPreview />
       <Skills />

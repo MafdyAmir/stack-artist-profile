@@ -52,7 +52,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-foreground">Location</h4>
-                  <p className="text-muted-foreground text-sm">Your City, Country</p>
+                  <p className="text-muted-foreground text-sm">Cairo, Egypt</p>
                 </div>
               </div>
 
@@ -64,10 +64,10 @@ const Contact = () => {
                 <div>
                   <h4 className="font-medium text-foreground">Email</h4>
                   <a 
-                    href="mailto:contact@example.com"
+                    href="mailto:mafdyamir@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
-                    contact@example.com
+                    mafdyamir@gmail.com
                   </a>
                 </div>
               </div>
@@ -79,7 +79,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-foreground">Phone</h4>
-                  <p className="text-muted-foreground text-sm">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground text-sm">+20 123 456 7890</p>
                 </div>
               </div>
 
@@ -88,7 +88,7 @@ const Contact = () => {
                 <h4 className="font-medium text-foreground mb-3">Connect with me</h4>
                 <div className="flex space-x-3">
                   <a
-                    href="https://github.com/yourusername"
+                    href="https://github.com/mafdyamir"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
@@ -96,7 +96,7 @@ const Contact = () => {
                     <Github className="h-4 w-4 text-primary" />
                   </a>
                   <a
-                    href="https://linkedin.com/in/yourusername"
+                    href="https://linkedin.com/in/mafdy-amir"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
@@ -104,7 +104,7 @@ const Contact = () => {
                     <Linkedin className="h-4 w-4 text-primary" />
                   </a>
                   <a
-                    href="mailto:contact@example.com"
+                    href="mailto:mafdyamir@gmail.com"
                     className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
                   >
                     <Mail className="h-4 w-4 text-primary" />

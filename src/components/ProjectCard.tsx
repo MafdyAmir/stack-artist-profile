@@ -1,5 +1,5 @@
 
-import { Github, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { Github, ExternalLink, ChevronDown, ChevronUp, Link } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ export interface ProjectCardProps {
   techStack: string[];
   githubUrl: string;
   demoUrl?: string;
+  id?: string;
   imageUrl?: string;
 }
 
@@ -21,6 +22,7 @@ const ProjectCard = ({
   techStack,
   githubUrl,
   demoUrl,
+  id,
   imageUrl,
 }: ProjectCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,6 +30,8 @@ const ProjectCard = ({
   const toggleExpand = () => setIsExpanded(!isExpanded);
   
   return (
+    <a href={`/projects/${id}`}>
+
     <Card className="project-card h-full flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="text-xl flex items-center justify-between">
@@ -87,7 +91,7 @@ const ProjectCard = ({
         )}
       </CardFooter>
     </Card>
-  );
+    </a>)
 };
 
 export default ProjectCard;

@@ -59,6 +59,7 @@ const ProjectsPreview = () => {
                 githubUrl={project.githubUrl}
                 demoUrl={project.demoUrl}
                 imageUrl={project.imageUrl}
+                id={project.id}
               />
             </div>
           ))}
