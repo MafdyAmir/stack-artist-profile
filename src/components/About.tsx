@@ -63,10 +63,13 @@ const About = () => {
             <div className="lg:col-span-3 animate-on-scroll space-y-6">
               <h2 className="section-title text-left">About Me</h2>
               <p className="text-xl text-foreground/80 leading-relaxed">
-                I'm a passionate backend developer with over 5 years of experience building robust server-side applications. I specialize in creating efficient, scalable, and maintainable systems.
+                I'm a passionate backend developer with over 2 years of experience building robust server-side applications. I specialize in creating efficient, scalable, and maintainable systems.
               </p>
               <p className="text-lg text-foreground/70 leading-relaxed">
                 My journey in software development is driven by a deep curiosity for how systems work. I thrive on solving complex problems and believe in writing clean, well-tested code that aligns with business goals.
+              </p>
+              <p className="text-lg text-foreground/70 leading-relaxed">
+                I'm currently expanding my knowledge in frontend technologies (React) to become a more versatile developer. I'm passionate about writing clean, testable code and collaborating with teams to build real-world digital solutions.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
                 <Button size="lg" className="glow" asChild>

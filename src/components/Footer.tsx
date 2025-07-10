@@ -51,7 +51,7 @@ const Footer = () => {
               <h3 className="font-bold text-xl text-foreground">Mafdy Amir</h3>
             </div>
             <p className="text-foreground/70 text-sm">
-              Full-stack developer passionate about creating modern web applications and intuitive user experiences.
+              software developer passionate about creating modern web applications and intuitive user experiences.
             </p>
             <div className="flex space-x-4">
               <a href="https://github.com/mafdyamir" target="_blank" rel="noopener noreferrer" className="text-foreground/70 hover:text-primary transition-colors" aria-label="GitHub">

@@ -10,6 +10,15 @@ import {
 
 const testimonials = [
   {
+    id: 4,
+    name: "Hany Fathy",
+    role: "Founder & CEO",
+    company: "Tungsten Media",
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+    rating: 5,
+    content: "MafdyAmir transformed our legacy system into a modern, scalable architecture. The project was delivered on time and within budget. Exceptional work!"
+  },
+  {
     id: 1,
     name: "Sarah Johnson",
     role: "CTO at TechStart",
@@ -37,15 +46,6 @@ const testimonials = [
     content: "The backend systems built by MafdyAmir are robust and maintainable. The documentation and testing practices are top-notch. A true professional!"
   },
   {
-    id: 4,
-    name: "David Thompson",
-    role: "Founder & CEO",
-    company: "StartupVenture",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    content: "MafdyAmir transformed our legacy system into a modern, scalable architecture. The project was delivered on time and within budget. Exceptional work!"
-  },
-  {
     id: 5,
     name: "Lisa Wang",
     role: "Engineering Director",
@@ -63,7 +63,7 @@ const Testimonials = () => {
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="section-title">What Clients Say</h2>
           <p className="section-subtitle">
-            Trusted by developers and companies worldwide
+            Trusted by clients and companies worldwide
           </p>
         </div>
 
@@ -137,11 +137,11 @@ const Testimonials = () => {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 animate-on-scroll">
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">50+</div>
+            <div className="text-4xl font-bold text-primary mb-2">5+</div>
             <p className="text-foreground/70">Happy Clients</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">100+</div>
+            <div className="text-4xl font-bold text-primary mb-2">10+</div>
             <p className="text-foreground/70">Projects Completed</p>
           </div>
           <div className="text-center">
