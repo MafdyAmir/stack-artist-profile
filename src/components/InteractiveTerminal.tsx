@@ -176,10 +176,11 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
   }, [history]);
 
   useEffect(() => {
-    if (inputRef.current) {
+    // Only auto-focus on desktop to prevent unwanted scrolling on mobile
+    if (inputRef.current && !reducedMotion) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div className={cn(
@@ -200,7 +201,7 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
       <div 
         ref={terminalRef}
         className="p-3 sm:p-6 h-64 sm:h-80 overflow-y-auto font-mono text-xs sm:text-sm leading-relaxed custom-scrollbar"
-        onClick={() => inputRef.current?.focus()}
+        onClick={() => !reducedMotion && inputRef.current?.focus()}
       >
         {history.map((line, index) => (
           <div key={index} className={cn(
