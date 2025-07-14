@@ -176,9 +176,14 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
   }, [history]);
 
   useEffect(() => {
-    // Only auto-focus on desktop to prevent unwanted scrolling on mobile
+    // Only auto-focus on desktop and add a delay to prevent initial scroll
     if (inputRef.current && !reducedMotion) {
-      inputRef.current.focus();
+      // Add a delay to prevent auto-scroll on page load
+      const timer = setTimeout(() => {
+        inputRef.current?.focus({ preventScroll: true });
+      }, 1000); // 1 second delay
+      
+      return () => clearTimeout(timer);
     }
   }, [reducedMotion]);
 
