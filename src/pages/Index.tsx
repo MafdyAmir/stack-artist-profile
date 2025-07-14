@@ -8,11 +8,16 @@ import Contact from "@/components/Contact";
 
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    // Skip animation setup on mobile/reduced motion
+    if (reducedMotion) return;
+
     // Cleanup previous observer if component re-renders
     if (observerRef.current) {
       observerRef.current.disconnect();
@@ -53,9 +58,12 @@ const Index = () => {
         observerRef.current.disconnect();
       }
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
+    // Skip parallax effects on mobile/reduced motion
+    if (reducedMotion) return;
+
     // Apply subtle parallax effect
     const handleMouseMove = (e: MouseEvent) => {
       const x = e.clientX / window.innerWidth;
@@ -76,7 +84,7 @@ const Index = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">

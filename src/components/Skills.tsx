@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 interface Skill {
   name: string;
@@ -43,6 +44,7 @@ const categories = [
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const reducedMotion = useReducedMotion();
 
   const filteredSkills = activeCategory === "all" 
     ? skills 
@@ -63,25 +65,33 @@ const Skills = () => {
               key={category.id}
               variant={activeCategory === category.id ? "default" : "outline"}
               onClick={() => setActiveCategory(category.id)}
-              className="transition-all duration-300"
+              className={reducedMotion ? "" : "transition-all duration-300"}
             >
               {category.label}
             </Button>
           ))}
         </div>
 
-        <div className="animate-on-scroll grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+        <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 ${reducedMotion ? "" : "animate-on-scroll"}`}>
           {filteredSkills.map((skill, index) => (
             <Card
               key={skill.name}
-              className="group hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer"
-              style={{ animationDelay: `${index * 50}ms` }}
+              className={`group border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/80 cursor-pointer ${
+                reducedMotion ? "" : "hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2"
+              }`}
+              style={reducedMotion ? {} : { animationDelay: `${index * 50}ms` }}
             >
               <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-                <div className="p-4 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                  <skill.icon className="h-12 w-12 text-primary group-hover:text-primary transition-colors duration-300" />
+                <div className={`p-4 rounded-xl bg-primary/10 ${
+                  reducedMotion ? "" : "group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                }`}>
+                  <skill.icon className={`h-12 w-12 text-primary ${
+                    reducedMotion ? "" : "group-hover:text-primary transition-colors duration-300"
+                  }`} />
                 </div>
-                <h3 className="font-semibold text-lg group-hover:text-primary transition-colors duration-300">
+                <h3 className={`font-semibold text-lg ${
+                  reducedMotion ? "" : "group-hover:text-primary transition-colors duration-300"
+                }`}>
                   {skill.name}
                 </h3>
               </CardContent>

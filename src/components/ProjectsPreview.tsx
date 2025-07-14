@@ -4,9 +4,11 @@ import { ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/data/projects";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const ProjectsPreview = () => {
   const [filter, setFilter] = useState<string>("all");
+  const reducedMotion = useReducedMotion();
   
   // Show only first 6 projects for preview
   const previewProjects = projects.slice(0, 6);
@@ -45,8 +47,8 @@ const ProjectsPreview = () => {
           {filteredProjects.map((project, index) => (
             <div 
               key={index} 
-              className="animate-on-scroll" 
-              style={{ 
+              className={reducedMotion ? "" : "animate-on-scroll"} 
+              style={reducedMotion ? {} : { 
                 animationDelay: `${index * 100}ms`,
                 opacity: 0,
                 transform: "translateY(20px)"
