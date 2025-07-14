@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,11 @@ import { getProjectsByCategory } from "@/data/projects";
 
 const Projects = () => {
   const [filter, setFilter] = useState<string>("all");
+  
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
   
   const categories = [
     { id: "all", label: "All Projects" },

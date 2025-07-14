@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { useReducedMotion } from "../hooks/useReducedMotion";
 const ProjectsPreview = () => {
   const [filter, setFilter] = useState<string>("all");
   const reducedMotion = useReducedMotion();
+  const navigate = useNavigate();
   
   // Show only first 6 projects for preview
   const previewProjects = projects.slice(0, 6);
@@ -20,6 +21,14 @@ const ProjectsPreview = () => {
   const filteredProjects = filter === "all" 
     ? previewProjects 
     : previewProjects.filter(project => project.techStack.includes(filter));
+
+  const handleViewAllProjects = () => {
+    // Navigate to projects page and scroll to top
+    navigate("/projects");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 0);
+  };
 
   return (
     <section id="projects" className="py-16 md:py-24 bg-gradient-to-br from-background to-secondary/10">
@@ -78,12 +87,10 @@ const ProjectsPreview = () => {
 
         {/* View All Projects Button */}
         <div className="text-center mt-12">
-          <Link to="/projects">
-            <Button size="lg" className="group">
-              View All Projects
-              <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <Button size="lg" className="group" onClick={handleViewAllProjects}>
+            View All Projects
+            <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
       </div>
     </section>
