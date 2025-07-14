@@ -14,11 +14,22 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useReducedMotion } from "./hooks/useReducedMotion";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    // Always scroll to top on app load/refresh
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Disable browser scroll restoration globally
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   return (
     <div className={reducedMotion ? 'reduce-motion' : ''}>

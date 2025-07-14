@@ -86,6 +86,16 @@ const Index = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [reducedMotion]);
 
+  useEffect(() => {
+    // Always scroll to top on page load/refresh
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Disable browser scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">
       <ScrollProgress />
