@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const testimonials = [
   {
@@ -57,17 +58,19 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="testimonials" className="py-20 md:py-28 bg-background">
       <div className="section-container">
-        <div className="text-center mb-16 animate-on-scroll">
+        <div className={`text-center mb-16 ${reducedMotion ? "" : "animate-on-scroll"}`}>
           <h2 className="section-title">What Clients Say</h2>
           <p className="section-subtitle">
             Trusted by clients and companies worldwide
           </p>
         </div>
 
-        <div className="animate-on-scroll">
+        <div className={reducedMotion ? "" : "animate-on-scroll"}>
           <Carousel
             opts={{
               align: "start",
@@ -79,7 +82,9 @@ const Testimonials = () => {
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="h-full">
-                    <div className="bg-card rounded-2xl p-8 h-full shadow-lg hover:shadow-xl transition-shadow duration-300 border border-border/50">
+                    <div className={`bg-card rounded-2xl p-8 h-full shadow-lg border border-border/50 ${
+                      reducedMotion ? "" : "hover:shadow-xl transition-shadow duration-300"
+                    }`}>
                       {/* Quote Icon */}
                       <div className="mb-6">
                         <Quote className="h-8 w-8 text-primary/60" />
@@ -135,7 +140,7 @@ const Testimonials = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 animate-on-scroll">
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 ${reducedMotion ? "" : "animate-on-scroll"}`}>
           <div className="text-center">
             <div className="text-4xl font-bold text-primary mb-2">5+</div>
             <p className="text-foreground/70">Happy Clients</p>

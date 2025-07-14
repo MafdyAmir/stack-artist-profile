@@ -1,6 +1,7 @@
 import { Database, Server, Code, Download, Mail, CloudCog, ShieldCheck, ClipboardCheck, Zap, Users } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const features = [
   {
@@ -46,13 +47,15 @@ const features = [
 ];
 
 const About = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="about" className="bg-secondary/30 py-20 md:py-28">
       <div className="section-container">
         <div className="space-y-20">
           {/* About Me: Image and Text */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-            <div className="lg:col-span-2 animate-on-scroll flex justify-center">
+            <div className={`lg:col-span-2 flex justify-center ${reducedMotion ? "" : "animate-on-scroll"}`}>
               <div className="glowing-border">
                 <Avatar className="w-80 h-80 md:w-96 md:h-96 rounded-2xl">
                   <AvatarImage src="profile_Image.jpg" alt="Mafdy - Backend Developer" className="object-cover rounded-2xl" />
@@ -60,7 +63,7 @@ const About = () => {
                 </Avatar>
               </div>
             </div>
-            <div className="lg:col-span-3 animate-on-scroll space-y-6">
+            <div className={`lg:col-span-3 space-y-6 ${reducedMotion ? "" : "animate-on-scroll"}`}>
               <h2 className="section-title text-left">About Me</h2>
               <p className="text-xl text-foreground/80 leading-relaxed">
                 I'm a passionate backend developer with over 2 years of experience building robust server-side applications. I specialize in creating efficient, scalable, and maintainable systems.
@@ -83,11 +86,13 @@ const About = () => {
           </div>
 
           {/* My Approach */}
-          <div className="animate-on-scroll text-center">
+          <div className={`text-center ${reducedMotion ? "" : "animate-on-scroll"}`}>
             <h3 className="section-subtitle">My Approach</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
               {features.map((feature, index) => (
-                <div key={index} className="bg-background p-6 rounded-lg shadow-md hover:shadow-primary/20 transition-shadow duration-300 flex flex-col items-center text-center">
+                <div key={index} className={`bg-background p-6 rounded-lg shadow-md flex flex-col items-center text-center ${
+                  reducedMotion ? "" : "hover:shadow-primary/20 transition-shadow duration-300"
+                }`}>
                   <div className="flex items-center justify-center h-16 w-16 rounded-full bg-primary text-primary-foreground mb-4">
                     <feature.icon className="h-8 w-8" />
                   </div>
