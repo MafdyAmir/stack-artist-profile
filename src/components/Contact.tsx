@@ -67,7 +67,7 @@ const Contact = () => {
                     href="mailto:mafdyamir@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
-                    mafdyamir@gmail.com
+                    mafdyamir15@gmail.com
                   </a>
                 </div>
               </div>
@@ -78,8 +78,8 @@ const Contact = () => {
                   <Phone className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground">Phone</h4>
-                  <p className="text-muted-foreground text-sm">+20 123 456 7890</p>
+                  <h4 className="font-medium text-foreground">Phone or WahtsApp</h4>
+                  <p className="text-muted-foreground text-sm">+201271151446</p>
                 </div>
               </div>
 
@@ -96,7 +96,7 @@ const Contact = () => {
                     <Github className="h-4 w-4 text-primary" />
                   </a>
                   <a
-                    href="https://linkedin.com/in/mafdy-amir"
+                    href="https://www.linkedin.com/in/mafdy-amir/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
