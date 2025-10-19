@@ -22,6 +22,7 @@ const skills: Skill[] = [
   { name: "NestJS", icon: Server, category: "frameworks", proficiency: 4 },
   { name: "Express.js", icon: Server, category: "frameworks", proficiency: 5 },
   { name: "GraphQL", icon: Code, category: "frameworks", proficiency: 4 },
+  { name: "SQL", icon: Code, category: "databases", proficiency: 4 },
   { name: "MongoDB", icon: Database, category: "databases", proficiency: 5 },
   { name: "ORMs", icon: Database, category: "databases", proficiency: 5 },
   { name: "PostgreSQL", icon: Database, category: "databases", proficiency: 4 },
