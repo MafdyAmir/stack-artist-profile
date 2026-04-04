@@ -285,6 +285,50 @@ export const projects: Project[] = [
     startDate: "2024-03-01",
   },
   {
+    id: "ai-code-generator",
+    title: "AI Code Generator",
+    description:
+      "An AI-powered system that takes a prompt from the user and automatically generates production-ready code.",
+    fullDescription:
+      "An intelligent code generation platform that leverages large language models (LLMs) to transform natural language prompts into working code. Users describe what they want to build, and the system generates clean, well-structured code in their desired programming language or framework. The backend handles prompt processing, context management, streaming responses, and post-processing to ensure the generated code follows best practices.",
+    techStack: [
+      "NestJS",
+      "OpenAI API",
+      "TypeScript",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+    ],
+    githubUrl: "https://github.com/username/ai-code-generator",
+    imageUrl:
+      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=400&fit=crop",
+    features: [
+      "Natural language prompt to code generation",
+      "Multi-language and framework support",
+      "Streaming code output in real time",
+      "Context-aware follow-up prompts",
+      "Code explanation and documentation generation",
+      "User authentication and prompt history",
+      "Rate limiting and usage tracking",
+      "Syntax highlighting and code formatting",
+    ],
+    challenges: [
+      "Managing token limits and context windows for long prompts",
+      "Ensuring generated code quality and correctness",
+      "Implementing real-time streaming responses",
+      "Handling prompt injection and security risks",
+    ],
+    learnings: [
+      "Integrating and fine-tuning LLM APIs",
+      "Streaming API responses with Server-Sent Events",
+      "Prompt engineering best practices",
+      "Building scalable AI-powered backend services",
+    ],
+    category: "fullstack",
+    status: "in-progress",
+    startDate: "2025-01-01",
+  },
+  {
     id: "microservices-demo",
     title: "Microservice Architecture",
     description:
