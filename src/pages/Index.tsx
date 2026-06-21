@@ -2,9 +2,12 @@ import { useEffect, useRef } from "react";
 
 import About from "@/components/About";
 import ProjectsPreview from "@/components/ProjectsPreview";
-import Skills from "@/components/Skills";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import HowICanHelp from "@/components/HowICanHelp";
+import WhyWorkWithMe from "@/components/WhyWorkWithMe";
+import Stats from "@/components/Stats";
+import ForRecruiters from "@/components/ForRecruiters";
 
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
@@ -100,11 +103,13 @@ const Index = () => {
     <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">
       <ScrollProgress />
       <Hero />
-      
+      <HowICanHelp />
       <About />
       <ProjectsPreview />
-      <Skills />
+      <WhyWorkWithMe />
+      <Stats />
       <Testimonials />
+      <ForRecruiters />
       <Contact />
     </div>
   );

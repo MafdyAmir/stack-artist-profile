@@ -37,9 +37,10 @@ const Contact = () => {
     <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-background to-secondary/5">
       <div className="section-container">
         <div className="text-center mb-16">
-          <h2 className="section-title">Let's Work Together</h2>
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Get In Touch</p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">Have a Project in Mind?</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I'm always interested in new opportunities and exciting projects. Let's discuss how we can build something amazing together.
+            Let's discuss your idea and turn it into a real product. I usually reply within 24 hours.
           </p>
         </div>
 
