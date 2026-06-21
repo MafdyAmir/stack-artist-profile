@@ -33,9 +33,11 @@ const ProjectsPreview = () => {
   return (
     <section id="projects" className="py-16 md:py-24 bg-gradient-to-br from-background to-secondary/10">
       <div className="section-container">
-        <h2 className="section-title">Featured Projects</h2>
+        <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Featured Work</p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Real projects, real business outcomes</h2>
         <p className="text-lg text-foreground/70 mb-8 max-w-3xl">
-          Here are some of the backend projects I've worked on. Each project has been built with scalability, maintainability, and performance in mind.
+          A selection of systems I've designed and shipped — each one solving a concrete
+          business problem. Click any project to see the challenge, the solution, and the result.
         </p>
         
         <div className="flex flex-wrap gap-2 mb-8 justify-center">

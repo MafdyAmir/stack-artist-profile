@@ -18,7 +18,7 @@ const Navbar = () => {
       
         // Only update active section on home page
         if (location.pathname === "/") {
-          const sections = ["home", "about", "projects", "skills", "testimonials", "contact"];
+          const sections = ["home", "services", "about", "projects", "why", "testimonials", "recruiters", "contact"];
         const sectionElements = sections.map(id => document.getElementById(id));
         
         const currentSectionIndex = sectionElements.findIndex((section, index) => {
@@ -74,10 +74,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", section: "home" },
+    { name: "Services", section: "services" },
     { name: "About", section: "about" },
     { name: "Projects", href: "/projects" },
-    { name: "Skills", section: "skills" },
-    { name: "Testimonials", section: "testimonials" },
+    { name: "For Recruiters", section: "recruiters" },
     { name: "Contact", section: "contact" },
   ];
 
