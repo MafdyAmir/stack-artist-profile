@@ -1,4 +1,4 @@
-import { Star, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -16,7 +16,6 @@ const testimonials = [
     role: "Founder & CEO",
     company: "Tungsten Media",
     avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
     content: "MafdyAmir transformed our legacy system into a modern, scalable architecture. The project was delivered on time and within budget. Exceptional work!"
   },
   {
@@ -25,7 +24,6 @@ const testimonials = [
     role: "CTO at TechStart",
     company: "TechStart Inc.",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
     content: "MafdyAmir delivered exceptional backend architecture for our platform. The scalable solutions and clean code implementation exceeded our expectations. Highly recommended!"
   },
   {
@@ -34,7 +32,6 @@ const testimonials = [
     role: "Lead Developer",
     company: "DataFlow Solutions",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
     content: "Working with MafdyAmir was a game-changer. The API design and database optimization improved our system performance by 300%. Outstanding technical expertise!"
   },
   {
@@ -43,7 +40,6 @@ const testimonials = [
     role: "Product Manager",
     company: "InnovateCorp",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
     content: "The backend systems built by MafdyAmir are robust and maintainable. The documentation and testing practices are top-notch. A true professional!"
   },
   {
@@ -52,7 +48,6 @@ const testimonials = [
     role: "Engineering Director",
     company: "CloudTech Ltd",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
     content: "The security implementations and DevOps practices implemented by MafdyAmir set new standards for our team. Incredible attention to detail and best practices."
   }
 ];
@@ -88,16 +83,6 @@ const Testimonials = () => {
                       {/* Quote Icon */}
                       <div className="mb-6">
                         <Quote className="h-8 w-8 text-primary/60" />
-                      </div>
-
-                      {/* Rating */}
-                      <div className="flex items-center gap-1 mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                          />
-                        ))}
                       </div>
 
                       {/* Content */}
@@ -137,22 +122,6 @@ const Testimonials = () => {
             <CarouselPrevious className="hidden md:flex" />
             <CarouselNext className="hidden md:flex" />
           </Carousel>
-        </div>
-
-        {/* Stats */}
-        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 ${reducedMotion ? "" : "animate-on-scroll"}`}>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">5+</div>
-            <p className="text-foreground/70">Happy Clients</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">10+</div>
-            <p className="text-foreground/70">Projects Completed</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">+2</div>
-            <p className="text-foreground/70">Years of Experience</p>
-          </div>
         </div>
       </div>
     </section>

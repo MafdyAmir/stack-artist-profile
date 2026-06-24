@@ -1,67 +1,68 @@
-import { Code2, Layers, Server, MessageCircle, Compass, Gauge } from "lucide-react";
+import { Code2, Compass, Gauge, Layers, MessageCircle, Server } from "lucide-react";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const reasons = [
   {
     icon: Code2,
     title: "Clean, maintainable code",
-    description: "Readable, well-tested, and documented — so future changes are cheap, not painful.",
+    description: "Easy to read, easy to extend, and easier to hand off later.",
   },
   {
     icon: Layers,
     title: "Scalable architecture",
-    description: "Built to handle growth from day one — modular, observable, and ready to scale.",
+    description: "Built with growth in mind so new features do not become rewrites.",
   },
   {
     icon: Server,
     title: "Strong backend expertise",
-    description: "Deep experience with APIs, databases, and infrastructure where business logic actually lives.",
+    description: "APIs, data flow, and business logic are handled with care.",
   },
   {
     icon: MessageCircle,
     title: "Clear communication",
-    description: "Plain-language updates, predictable delivery, and no surprises mid-project.",
+    description: "You always know what is being built, what is next, and what changed.",
   },
   {
     icon: Compass,
     title: "Long-term thinking",
-    description: "I build solutions you can keep — not throwaway code that locks you in.",
+    description: "I optimize for systems that stay useful after launch.",
   },
   {
     icon: Gauge,
     title: "Performance focus",
-    description: "Fast pages, fast APIs, lower hosting bills — measured, not assumed.",
+    description: "Fast experiences, efficient flows, and fewer bottlenecks.",
   },
 ];
 
 const WhyWorkWithMe = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
-    <section id="why" className="py-20 md:py-28 bg-secondary/30">
+    <section id="why" className="bg-background py-20 md:py-28">
       <div className="section-container !py-0">
-        <div className="max-w-3xl mb-12">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Why Work With Me
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            The kind of developer you actually want on your team
+          <h2 className="text-3xl font-bold md:text-4xl">
+            The kind of developer you want when quality matters
           </h2>
-          <p className="text-lg text-foreground/70">
-            Hiring a developer is a long-term decision. Here's what you can expect when we work together.
+          <p className="mt-4 text-lg leading-8 text-foreground/70">
+            Hiring is about trust. I focus on clarity, dependable execution, and software that keeps working after the launch day.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reasons.map((r) => (
+        <div className={`grid gap-6 md:grid-cols-2 lg:grid-cols-3 ${reducedMotion ? "" : "animate-on-scroll"}`}>
+          {reasons.map((reason) => (
             <div
-              key={r.title}
-              className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/40 transition-colors"
+              key={reason.title}
+              className="group rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10"
             >
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                <r.icon className="h-6 w-6" />
+              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <reason.icon className="h-6 w-6" />
               </div>
-              <div>
-                <h3 className="font-semibold mb-1">{r.title}</h3>
-                <p className="text-sm text-foreground/70 leading-relaxed">{r.description}</p>
-              </div>
+              <h3 className="text-lg font-semibold">{reason.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-foreground/70">{reason.description}</p>
             </div>
           ))}
         </div>

@@ -18,7 +18,7 @@ const Navbar = () => {
       
         // Only update active section on home page
         if (location.pathname === "/") {
-          const sections = ["home", "services", "about", "projects", "why", "testimonials", "recruiters", "contact"];
+          const sections = ["home", "services", "about", "projects", "why", "achievements", "recruiters", "contact"];
         const sectionElements = sections.map(id => document.getElementById(id));
         
         const currentSectionIndex = sectionElements.findIndex((section, index) => {
@@ -77,7 +77,8 @@ const Navbar = () => {
     { name: "Services", section: "services" },
     { name: "About", section: "about" },
     { name: "Projects", href: "/projects" },
-    { name: "For Recruiters", section: "recruiters" },
+    { name: "Why Work With Me", section: "why" },
+    { name: "Recruiters", section: "recruiters" },
     { name: "Contact", section: "contact" },
   ];
 
@@ -106,10 +107,10 @@ const Navbar = () => {
           
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
-              const isActive = isProjectsPage && link.name === "Projects" 
-                ? true 
+              const isActive = isProjectsPage && link.href
+                ? true
                 : !isProjectsPage && activeSection === link.section;
-              
+
               if (link.href) {
                 return (
                   <Link
@@ -126,7 +127,7 @@ const Navbar = () => {
                   </Link>
                 );
               }
-              
+
               return (
                 <button
                   key={link.name}
@@ -169,17 +170,17 @@ const Navbar = () => {
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-background/90 backdrop-blur-md shadow-sm">
           {navLinks.map((link) => {
-            const isActive = isProjectsPage && link.name === "Projects" 
-              ? true 
+            const isActive = isProjectsPage && link.href
+              ? true
               : !isProjectsPage && activeSection === link.section;
-            
+
             if (link.href) {
               return (
                 <Link
                   key={link.name}
                   to={link.href}
                   className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer",
+                    "block rounded-md px-3 py-2 text-base font-medium transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -190,13 +191,13 @@ const Navbar = () => {
                 </Link>
               );
             }
-            
+
             return (
               <button
                 key={link.name}
                 onClick={() => handleSectionClick(link.section)}
                 className={cn(
-                  "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 cursor-pointer w-full text-left bg-transparent border-none",
+                  "block w-full rounded-md bg-transparent border-none px-3 py-2 text-left text-base font-medium transition-colors duration-300 cursor-pointer",
                   isActive
                     ? "bg-primary/10 text-primary"
                     : "hover:bg-accent hover:text-accent-foreground"

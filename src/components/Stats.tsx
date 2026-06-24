@@ -45,15 +45,15 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 
 const Stats = () => {
   return (
-    <section className="py-16 bg-primary/5 border-y border-border">
+    <section id="achievements" className="border-y border-border/60 bg-primary/5 py-16">
       <div className="section-container !py-0">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                <Counter value={s.value} suffix={s.suffix} />
+        <div className="grid gap-6 rounded-[2rem] border border-border/60 bg-background/80 p-6 md:grid-cols-4 md:p-8">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="mb-2 text-4xl font-bold text-primary md:text-5xl">
+                <Counter value={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-sm md:text-base text-foreground/70 font-medium">{s.label}</p>
+              <p className="text-sm font-medium text-foreground/70">{stat.label}</p>
             </div>
           ))}
         </div>

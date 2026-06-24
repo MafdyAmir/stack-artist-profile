@@ -1,28 +1,38 @@
-import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Briefcase, Code2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const skills = [
-  "Node.js", "NestJS", "Express", "TypeScript", "Python",
-  "PostgreSQL", "MongoDB", "Redis", "GraphQL", "REST APIs",
-  "Docker", "AWS", "CI/CD", "Microservices", "System Design",
+  "React",
+  "TypeScript",
+  "Node.js",
+  "NestJS",
+  "Express",
+  "PostgreSQL",
+  "MongoDB",
+  "Redis",
+  "Docker",
+  "AWS",
 ];
 
 const ForRecruiters = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
-    <section id="recruiters" className="py-20 md:py-28 bg-background">
+    <section id="recruiters" className="bg-secondary/20 py-20 md:py-28">
       <div className="section-container !py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <div className="lg:col-span-2">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+        <div className="grid gap-10 lg:grid-cols-5">
+          <div className={`lg:col-span-2 ${reducedMotion ? "" : "animate-on-scroll"}`}>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               For Recruiters
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Evaluating me for a role?
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Looking for a software engineer who can ship and communicate clearly?
             </h2>
-            <p className="text-foreground/70 mb-6 leading-relaxed">
-              Everything you need to assess my fit — resume, code, profile, and a quick
-              experience summary — all in one place.
+            <p className="mb-6 leading-8 text-foreground/70">
+              This section gives you the fastest path to evaluate fit: resume, profile links, a short experience summary, and the technical stack I use most often.
             </p>
+
             <div className="flex flex-wrap gap-3">
               <Button size="lg" asChild>
                 <a
@@ -30,44 +40,51 @@ const ForRecruiters = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Download className="h-4 w-4 mr-2" />Download Resume
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Resume
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="https://github.com/mafdyamir" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4 mr-2" />GitHub
+                  <Github className="mr-2 h-4 w-4" />
+                  GitHub
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="https://www.linkedin.com/in/mafdy-amir/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-4 w-4 mr-2" />LinkedIn
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  LinkedIn
                 </a>
               </Button>
             </div>
           </div>
 
-          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="p-6 rounded-2xl border border-border bg-card">
-              <div className="flex items-center gap-2 mb-3 text-primary">
+          <div className="lg:col-span-3 grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-border/60 bg-card p-6">
+              <div className="mb-3 flex items-center gap-2 text-primary">
                 <Briefcase className="h-5 w-5" />
                 <h3 className="font-semibold">Experience Summary</h3>
               </div>
-              <ul className="space-y-2 text-sm text-foreground/75 leading-relaxed">
-                <li>• 2+ years building production backend systems</li>
-                <li>• Delivered APIs, CMSs, e-commerce, and real-time platforms</li>
-                <li>• Comfortable across the full stack with React on the frontend</li>
-                <li>• Remote-ready, available immediately for new opportunities</li>
+              <ul className="space-y-2 text-sm leading-6 text-foreground/75">
+                <li>• 2+ years building production web applications and APIs</li>
+                <li>• Experience across business systems, commerce, support, and automation</li>
+                <li>• Comfortable owning both frontend delivery and backend architecture</li>
+                <li>• Strong communication, delivery discipline, and problem-solving focus</li>
               </ul>
             </div>
-            <div className="p-6 rounded-2xl border border-border bg-card">
-              <div className="flex items-center gap-2 mb-3 text-primary">
+
+            <div className="rounded-2xl border border-border/60 bg-card p-6">
+              <div className="mb-3 flex items-center gap-2 text-primary">
                 <Code2 className="h-5 w-5" />
-                <h3 className="font-semibold">Core Technical Skills</h3>
+                <h3 className="font-semibold">Technical Skills</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {skills.map((s) => (
-                  <span key={s} className="text-xs px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground font-medium">
-                    {s}
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                  >
+                    {skill}
                   </span>
                 ))}
               </div>

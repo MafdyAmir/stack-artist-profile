@@ -1,97 +1,47 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import ProjectCard from "./ProjectCard";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ProjectCard from "./ProjectCard";
 import { projects } from "@/data/projects";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const ProjectsPreview = () => {
-  const [filter, setFilter] = useState<string>("all");
   const reducedMotion = useReducedMotion();
-  const navigate = useNavigate();
-  
-  // Show only first 6 projects for preview
-  const previewProjects = projects.slice(0, 6);
-  
-  // Extract unique tech categories from preview projects
-  const techCategories = ["all", ...new Set(previewProjects.flatMap(p => p.techStack))].sort();
-  
-  // Filter projects based on selected tech
-  const filteredProjects = filter === "all" 
-    ? previewProjects 
-    : previewProjects.filter(project => project.techStack.includes(filter));
-
-  const handleViewAllProjects = () => {
-    // Navigate to projects page and scroll to top
-    navigate("/projects");
-    setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 0);
-  };
+  const featuredProjects = projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-16 md:py-24 bg-gradient-to-br from-background to-secondary/10">
-      <div className="section-container">
-        <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Featured Work</p>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Real projects, real business outcomes</h2>
-        <p className="text-lg text-foreground/70 mb-8 max-w-3xl">
-          A selection of systems I've designed and shipped — each one solving a concrete
-          business problem. Click any project to see the challenge, the solution, and the result.
-        </p>
-        
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          {techCategories.slice(0, 8).map((tech) => (
-            <Button 
-              key={tech} 
-              variant={filter === tech ? "default" : "outline"}
-              size="sm"
-              className="mb-2 transition-all duration-300"
-              onClick={() => setFilter(tech)}
-            >
-              {tech}
-            </Button>
-          ))}
+    <section id="projects" className="bg-gradient-to-b from-background via-secondary/10 to-background py-20 md:py-28">
+      <div className="section-container !py-0">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            Featured Case Studies
+          </p>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            Projects framed around business outcomes
+          </h2>
+          <p className="text-lg leading-8 text-foreground/70">
+            Each project below shows the challenge, the approach, and the result — so clients and recruiters can understand the value quickly.
+          </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {filteredProjects.map((project, index) => (
-            <div 
-              key={index} 
-              className={reducedMotion ? "" : "animate-on-scroll"} 
-              style={reducedMotion ? {} : { 
-                animationDelay: `${index * 100}ms`,
-                opacity: 0,
-                transform: "translateY(20px)"
-              }}
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          {featuredProjects.map((project, index) => (
+            <div
+              key={project.id}
+              className={reducedMotion ? "" : "animate-on-scroll"}
+              style={reducedMotion ? {} : { animationDelay: `${index * 100}ms` }}
             >
-              <ProjectCard 
-                title={project.title}
-                description={project.description}
-                techStack={project.techStack}
-                githubUrl={project.githubUrl}
-                demoUrl={project.demoUrl}
-                imageUrl={project.imageUrl}
-                id={project.id}
-              />
+              <ProjectCard project={project} />
             </div>
           ))}
         </div>
-        
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-lg text-foreground/70">No projects match the selected filter.</p>
-            <Button onClick={() => setFilter("all")} className="mt-4">
-              Show all projects
-            </Button>
-          </div>
-        )}
 
-        {/* View All Projects Button */}
-        <div className="text-center mt-12">
-          <Button size="lg" className="group" onClick={handleViewAllProjects}>
-            View All Projects
-            <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+        <div className="mt-12 text-center">
+          <Button size="lg" asChild>
+            <Link to="/projects">
+              View All Case Studies
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
         </div>
       </div>

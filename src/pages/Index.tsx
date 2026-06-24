@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 
 import About from "@/components/About";
 import ProjectsPreview from "@/components/ProjectsPreview";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import HowICanHelp from "@/components/HowICanHelp";
 import WhyWorkWithMe from "@/components/WhyWorkWithMe";
+import Testimonials from "@/components/Testimonials";
 import Stats from "@/components/Stats";
 import ForRecruiters from "@/components/ForRecruiters";
 
@@ -100,15 +100,15 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-backgrounds text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <ScrollProgress />
       <Hero />
       <HowICanHelp />
       <About />
       <ProjectsPreview />
       <WhyWorkWithMe />
-      <Stats />
       <Testimonials />
+      <Stats />
       <ForRecruiters />
       <Contact />
     </div>

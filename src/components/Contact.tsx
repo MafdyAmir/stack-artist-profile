@@ -1,11 +1,13 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Linkedin, Mail, MapPin, Phone, Send, MessageCircle } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Github, Linkedin, Mail, MessageCircle, Phone, Check, AlertCircle, Loader2 } from "lucide-react";
 import { useReducedMotion } from "../hooks/useReducedMotion";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +16,21 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const reducedMotion = useReducedMotion();
+  const { toast } = useToast();
+
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -26,225 +39,236 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! This is a demo form - in a real portfolio, this would send your message.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
+
+      if (!serviceId || !templateId) {
+        throw new Error("EmailJS configuration is incomplete. Please check your .env.local file.");
+      }
+
+      // Send email to your inbox
+      await emailjs.send(serviceId, templateId, {
+        to_email: contactEmail,
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        reply_to: formData.email,
+      });
+
+      // Send confirmation email to user
+      await emailjs.send(serviceId, templateId, {
+        to_email: formData.email,
+        from_name: "Mafdy Amir",
+        from_email: contactEmail,
+        subject: `Thank you for reaching out - ${formData.subject}`,
+        message: `Hi ${formData.name},\n\nThank you for your message. I received your inquiry about "${formData.subject}" and will get back to you within 24 hours.\n\nBest regards,\nMafdy Amir`,
+        reply_to: contactEmail,
+      });
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      
+      toast({
+        title: "Message sent!",
+        description: "I''ll get back to you soon. Check your email for confirmation.",
+      });
+    } catch (error) {
+      setSubmitStatus("error");
+      console.error("Email error:", error);
+      
+      toast({
+        title: "Oops! Something went wrong",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again or contact me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  const contactLinks = [
+    {
+      icon: Mail,
+      title: "Email",
+      value: "mafdyamir15@gmail.com",
+      href: "mailto:mafdyamir15@gmail.com",
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      value: "+20 127 115 1446",
+      href: "https://wa.me/201271151446",
+    },
+    {
+      icon: Linkedin,
+      title: "LinkedIn",
+      value: "Mafdy Amir",
+      href: "https://www.linkedin.com/in/mafdy-amir/",
+    },
+  ];
+
   return (
-    <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-background to-secondary/5">
+    <section id="contact" className="bg-gradient-to-b from-background to-secondary/10 py-20 md:py-28">
       <div className="section-container">
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Get In Touch</p>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Have a Project in Mind?</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Let's discuss your idea and turn it into a real product. I usually reply within 24 hours.
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            Get In Touch
+          </p>
+          <h2 className="text-3xl font-bold md:text-5xl">Have a Project in Mind?</h2>
+          <p className="mt-4 text-lg leading-8 text-foreground/70">
+            Let''s discuss your idea and turn it into a real product.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {/* Quick Contact Cards */}
-          <Card className={`text-center p-6 border-2 border-transparent hover:border-primary/20 ${reducedMotion ? "" : "hover:shadow-lg transition-all duration-300"}`}>
-            <CardContent className="pt-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="h-8 w-8 text-white" />
+        <div className="grid gap-6 lg:grid-cols-3">
+          {contactLinks.map((link) => (
+            <a
+              key={link.title}
+              href={link.href}
+              target={link.title === "Email" ? "_self" : "_blank"}
+              rel="noopener noreferrer"
+              className="group rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10"
+            >
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <link.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Email Me</h3>
-              <p className="text-muted-foreground text-sm mb-4">
-                Send me an email and I'll get back to you within 24 hours.
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                {link.title}
               </p>
-              <a 
-                href="mailto:mafdyamir15@gmail.com"
-                className="text-primary hover:text-primary/80 font-medium text-sm"
-              >
-                mafdyamir15@gmail.com
-              </a>
-            </CardContent>
-          </Card>
-
-          <Card className={`text-center p-6 border-2 border-transparent hover:border-primary/20 ${reducedMotion ? "" : "hover:shadow-lg transition-all duration-300"}`}>
-            <CardContent className="pt-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Call or WhatsApp</h3>
-              <p className="text-muted-foreground text-sm mb-4">
-                Available for calls Monday to Friday, 9 AM - 6 PM (GMT+2).
-              </p>
-              <a 
-                href="tel:+201271151446"
-                className="text-primary hover:text-primary/80 font-medium text-sm"
-              >
-                +20 127 115 1446
-              </a>
-            </CardContent>
-          </Card>
-
-          <Card className={`text-center p-6 border-2 border-transparent hover:border-primary/20 ${reducedMotion ? "" : "hover:shadow-lg transition-all duration-300"}`}>
-            <CardContent className="pt-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Location</h3>
-              <p className="text-muted-foreground text-sm mb-4">
-                Based in Cairo, Egypt. Available for remote work worldwide.
-              </p>
-              <span className="text-primary font-medium text-sm">
-                Cairo, Egypt
-              </span>
-            </CardContent>
-          </Card>
+              <p className="mt-2 font-medium text-foreground">{link.value}</p>
+            </a>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <Card className="shadow-xl border-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-2xl flex items-center gap-2">
-                <Mail className="h-6 w-6 text-primary" />
-                Send a Message
-              </CardTitle>
-              <p className="text-muted-foreground">
-                Fill out the form below and I'll get back to you as soon as possible.
+        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          <Card className={`border-border/60 bg-card/90 shadow-lg ${reducedMotion ? "" : "animate-on-scroll"}`}>
+            <CardContent className="p-6 md:p-8">
+              <h3 className="text-2xl font-bold">Send a Message</h3>
+              <p className="mt-2 text-sm leading-6 text-foreground/70">
+                Tell me what you want to build, what problem you''re solving, and what a successful outcome looks like.
               </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Full Name *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full h-12"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                      Email Address *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full h-12"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                    Subject *
-                  </label>
+              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
                   <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
+                    placeholder="Full name"
                     required
-                    className="w-full h-12"
-                    placeholder="Project Discussion / Job Opportunity / Collaboration"
+                    className="h-12"
+                    disabled={isSubmitting}
+                  />
+                  <Input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email address"
+                    required
+                    className="h-12"
+                    disabled={isSubmitting}
                   />
                 </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Message *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full min-h-[120px] resize-none"
-                    placeholder="Tell me about your project, requirements, or how I can help you..."
-                  />
-                </div>
-                <Button type="submit" className="w-full h-12 text-lg font-medium">
-                  Send Message
-                  <Mail className="ml-2 h-5 w-5" />
+                <Input
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Project discussion, job opportunity, or collaboration"
+                  required
+                  className="h-12"
+                  disabled={isSubmitting}
+                />
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Share a little about your project or the role you have in mind."
+                  required
+                  className="min-h-[150px]"
+                  disabled={isSubmitting}
+                />
+
+                {submitStatus === "success" && (
+                  <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 p-4 text-green-700">
+                    <Check className="h-5 w-5" />
+                    <p className="text-sm font-medium">Message sent successfully! Check your email.</p>
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+                    <AlertCircle className="h-5 w-5" />
+                    <p className="text-sm font-medium">Failed to send message. Please try again or contact me directly.</p>
+                  </div>
+                )}
+
+                <Button 
+                  type="submit" 
+                  className="w-full h-12"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
-          {/* Social Links & Additional Info */}
-          <div className="space-y-8">
-            <Card className="p-6 border-0 bg-gradient-to-br from-primary/5 to-primary/10">
-              <CardContent className="pt-0">
-                <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
-                <p className="text-muted-foreground mb-6">
-                  Follow me on social media or check out my work on these platforms.
-                </p>
-                <div className="grid grid-cols-1 gap-4">
-                  <a
-                    href="https://github.com/mafdyamir"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 rounded-lg border border-border hover:border-primary/30 bg-background/50 ${reducedMotion ? "" : "hover:shadow-md transition-all duration-300"}`}
-                  >
-                    <div className="w-10 h-10 bg-gray-900 dark:bg-gray-100 rounded-full flex items-center justify-center">
-                      <Github className="h-5 w-5 text-white dark:text-gray-900" />
-                    </div>
-                    <div>
-                      <p className="font-medium">GitHub</p>
-                      <p className="text-sm text-muted-foreground">View my code repositories</p>
-                    </div>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/mafdy-amir/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 rounded-lg border border-border hover:border-primary/30 bg-background/50 ${reducedMotion ? "" : "hover:shadow-md transition-all duration-300"}`}
-                  >
-                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                      <Linkedin className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium">LinkedIn</p>
-                      <p className="text-sm text-muted-foreground">Professional network</p>
-                    </div>
-                  </a>
-                </div>
+          <div className="space-y-6">
+            <Card className="border-border/60 bg-card/90">
+              <CardContent className="p-6 md:p-8">
+                <h3 className="text-xl font-semibold">Why contact me</h3>
+                <ul className="mt-4 space-y-3 text-sm leading-6 text-foreground/70">
+                  <li>• I reply quickly and keep communication straightforward.</li>
+                  <li>• I focus on outcomes, not just feature checklists.</li>
+                  <li>• I can help refine scope before the project starts.</li>
+                  <li>• I build for long-term maintainability and performance.</li>
+                </ul>
               </CardContent>
             </Card>
 
-            <Card className="p-6 border-0 bg-gradient-to-br from-green-500/5 to-green-600/10">
-              <CardContent className="pt-0">
-                <h3 className="text-xl font-semibold mb-4">Quick Response</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="font-medium">Email Response</p>
-                      <p className="text-sm text-muted-foreground">Within 24 hours</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="font-medium">Project Discussion</p>
-                      <p className="text-sm text-muted-foreground">Free 30-minute consultation</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="font-medium">Availability</p>
-                      <p className="text-sm text-muted-foreground">Open to new opportunities</p>
-                    </div>
-                  </div>
+            <Card className="border-border/60 bg-card/90">
+              <CardContent className="p-6 md:p-8">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-primary" />
+                  <h3 className="text-xl font-semibold">Best for quick inquiries</h3>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-foreground/70">
+                  If you already know what you need, email or WhatsApp is the fastest way to start.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Button asChild variant="outline">
+                    <a href="mailto:mafdyamir15@gmail.com">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email Me
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href="https://wa.me/201271151446" target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      WhatsApp
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href="https://github.com/mafdyamir" target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" />
+                      GitHub
+                    </a>
+                  </Button>
                 </div>
               </CardContent>
             </Card>

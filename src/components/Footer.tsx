@@ -26,32 +26,33 @@ const Footer = () => {
 
   const quickLinks = [
     { name: "Home", section: "home" },
+    { name: "Services", section: "services" },
     { name: "About", section: "about" },
-    { name: "Projects", section: "projects" },
-    { name: "Skills", section: "skills" },
+    { name: "Projects", href: "/projects" },
+    { name: "Why Work With Me", section: "why" },
+    { name: "Recruiters", section: "recruiters" },
     { name: "Contact", section: "contact" },
   ];
 
   const services = [
-    { name: "Web Development" },
-    { name: "UI/UX Design" },
-    { name: "API Development" },
-    { name: "Database Management" },
-    { name: "DevOps & Deployment" },
+    { name: "Custom business systems" },
+    { name: "E-commerce platforms" },
+    { name: "Admin dashboards" },
+    { name: "API integrations" },
+    { name: "Performance optimization" },
   ];
 
   return (
     <footer className="bg-background border-t border-foreground/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Column 1: Bio */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Shield className="h-6 w-6 text-primary" />
               <h3 className="font-bold text-xl text-foreground">Mafdy Amir</h3>
             </div>
             <p className="text-foreground/70 text-sm">
-              software developer passionate about creating modern web applications and intuitive user experiences.
+              Full-stack developer building web products that help businesses operate more efficiently and grow with confidence.
             </p>
             <div className="flex space-x-4">
               <a href="https://github.com/mafdyamir" target="_blank" rel="noopener noreferrer" className="text-foreground/70 hover:text-primary transition-colors" aria-label="GitHub">
@@ -66,21 +67,25 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div className="md:mx-auto">
             <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <button onClick={() => handleSectionClick(link.section)} className="text-foreground/60 hover:text-primary transition-colors text-sm bg-transparent border-none cursor-pointer p-0">
-                    {link.name}
-                  </button>
+                  {link.href ? (
+                    <Link to={link.href} className="text-sm text-foreground/60 transition-colors hover:text-primary">
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <button onClick={() => handleSectionClick(link.section)} className="bg-transparent border-none cursor-pointer p-0 text-sm text-foreground/60 transition-colors hover:text-primary">
+                      {link.name}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Services */}
           <div className="md:mx-auto">
             <h4 className="font-semibold text-foreground mb-4">Services</h4>
             <ul className="space-y-2">
