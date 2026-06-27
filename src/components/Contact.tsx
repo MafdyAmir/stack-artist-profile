@@ -1,11 +1,19 @@
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Mail, MessageCircle, Phone, Check, AlertCircle, Loader2 } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Phone,
+  Check,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { useToast } from "@/hooks/use-toast";
 
@@ -21,7 +29,6 @@ const Contact = () => {
   const reducedMotion = useReducedMotion();
   const { toast } = useToast();
 
-  // Initialize EmailJS
   useEffect(() => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     if (publicKey) {
@@ -29,9 +36,7 @@ const Contact = () => {
     }
   }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -49,44 +54,30 @@ const Contact = () => {
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 
-      if (!serviceId || !templateId) {
+      if (!serviceId || !templateId || !contactEmail) {
         throw new Error("EmailJS configuration is incomplete. Please check your .env.local file.");
       }
 
-      // Send email to your inbox
       await emailjs.send(serviceId, templateId, {
-        to_email: contactEmail,
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
+        name: formData.name,
+        time: new Date().toLocaleString(),
         message: formData.message,
-        reply_to: formData.email,
-      });
-
-      // Send confirmation email to user
-      await emailjs.send(serviceId, templateId, {
-        to_email: formData.email,
-        from_name: "Mafdy Amir",
-        from_email: contactEmail,
-        subject: `Thank you for reaching out - ${formData.subject}`,
-        message: `Hi ${formData.name},\n\nThank you for your message. I received your inquiry about "${formData.subject}" and will get back to you within 24 hours.\n\nBest regards,\nMafdy Amir`,
-        reply_to: contactEmail,
+        title: formData.subject,
+        email: formData.email,
       });
 
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-      
       toast({
         title: "Message sent!",
-        description: "I''ll get back to you soon. Check your email for confirmation.",
+        description: "I will get back to you soon.",
       });
     } catch (error) {
       setSubmitStatus("error");
-      console.error("Email error:", error);
-      
+      console.error("EmailJS error:", error);
       toast({
-        title: "Oops! Something went wrong",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again or contact me directly.",
+        title: "Something went wrong",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again or email me directly.",
         variant: "destructive",
       });
     } finally {
@@ -119,13 +110,9 @@ const Contact = () => {
     <section id="contact" className="bg-gradient-to-b from-background to-secondary/10 py-20 md:py-28">
       <div className="section-container">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-            Get In Touch
-          </p>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">Get In Touch</p>
           <h2 className="text-3xl font-bold md:text-5xl">Have a Project in Mind?</h2>
-          <p className="mt-4 text-lg leading-8 text-foreground/70">
-            Let''s discuss your idea and turn it into a real product.
-          </p>
+          <p className="mt-4 text-lg leading-8 text-foreground/70">Let's discuss your idea and turn it into a real product.</p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -140,9 +127,7 @@ const Contact = () => {
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <link.icon className="h-5 w-5" />
               </div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                {link.title}
-              </p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">{link.title}</p>
               <p className="mt-2 font-medium text-foreground">{link.value}</p>
             </a>
           ))}
@@ -153,7 +138,7 @@ const Contact = () => {
             <CardContent className="p-6 md:p-8">
               <h3 className="text-2xl font-bold">Send a Message</h3>
               <p className="mt-2 text-sm leading-6 text-foreground/70">
-                Tell me what you want to build, what problem you''re solving, and what a successful outcome looks like.
+                Tell me what you want to build, what problem you're solving, and what a successful outcome looks like.
               </p>
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 <div className="grid gap-4 md:grid-cols-2">
@@ -199,22 +184,18 @@ const Contact = () => {
                 {submitStatus === "success" && (
                   <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 p-4 text-green-700">
                     <Check className="h-5 w-5" />
-                    <p className="text-sm font-medium">Message sent successfully! Check your email.</p>
+                    <p className="text-sm font-medium">Message sent successfully!</p>
                   </div>
                 )}
 
                 {submitStatus === "error" && (
                   <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
                     <AlertCircle className="h-5 w-5" />
-                    <p className="text-sm font-medium">Failed to send message. Please try again or contact me directly.</p>
+                    <p className="text-sm font-medium">Failed to send message. Please try again or email me directly.</p>
                   </div>
                 )}
 
-                <Button 
-                  type="submit" 
-                  className="w-full h-12"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" className="w-full h-12" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -224,6 +205,10 @@ const Contact = () => {
                     "Send Message"
                   )}
                 </Button>
+
+                <p className="text-xs text-foreground/50">
+                  If delivery fails, make sure your EmailJS template fields are: name, time, message, title, and email.
+                </p>
               </form>
             </CardContent>
           </Card>
@@ -233,10 +218,10 @@ const Contact = () => {
               <CardContent className="p-6 md:p-8">
                 <h3 className="text-xl font-semibold">Why contact me</h3>
                 <ul className="mt-4 space-y-3 text-sm leading-6 text-foreground/70">
-                  <li>• I reply quickly and keep communication straightforward.</li>
-                  <li>• I focus on outcomes, not just feature checklists.</li>
-                  <li>• I can help refine scope before the project starts.</li>
-                  <li>• I build for long-term maintainability and performance.</li>
+                  <li>- I reply quickly and keep communication straightforward.</li>
+                  <li>- I focus on outcomes, not just feature checklists.</li>
+                  <li>- I can help refine scope before the project starts.</li>
+                  <li>- I build for long-term maintainability and performance.</li>
                 </ul>
               </CardContent>
             </Card>
