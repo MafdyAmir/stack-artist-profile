@@ -37,6 +37,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/traditional-cms",
     imageUrl:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=1400&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1400&h=800&fit=crop",
+      ],
     category: "business-system",
     status: "completed",
     timeframe: "2024",
@@ -82,7 +87,12 @@ export const projects: Project[] = [
     demoUrl: "https://api-docs.example.com",
     imageUrl:
       "https://media.istockphoto.com/id/863958328/vector/stethoscope-icon.jpg?s=612x612&w=0&k=20&c=to7jGDQ9xktMUmA1CjHs5Dg_9Xg9fwhG2M5jOR-NtXk=",
-    category: "business-system",
+    gallery: [
+      "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1400&h=800&fit=crop",
+    ],
+      category: "business-system",
     status: "completed",
     timeframe: "2023",
   },
