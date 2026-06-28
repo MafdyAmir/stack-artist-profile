@@ -57,6 +57,11 @@ export const projects: Project[] = [
     demoUrl: "https://api-docs.example.com",
     imageUrl:
       "https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg",
+    gallery: [
+      "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1400&h=800&fit=crop",
+    ],
     category: "commerce",
     status: "completed",
     timeframe: "2023",
