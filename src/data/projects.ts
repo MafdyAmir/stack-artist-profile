@@ -9,6 +9,7 @@ export interface Project {
   githubUrl: string;
   demoUrl?: string;
   imageUrl?: string;
+  gallery?: string[];
   category:
     | "business-system"
     | "commerce"
