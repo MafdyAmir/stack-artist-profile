@@ -37,6 +37,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/traditional-cms",
     imageUrl:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&h=800&fit=crop",
+    ],
     category: "business-system",
     status: "completed",
     timeframe: "2024",
@@ -82,6 +87,11 @@ export const projects: Project[] = [
     demoUrl: "https://api-docs.example.com",
     imageUrl:
       "https://media.istockphoto.com/id/863958328/vector/stethoscope-icon.jpg?s=612x612&w=0&k=20&c=to7jGDQ9xktMUmA1CjHs5Dg_9Xg9fwhG2M5jOR-NtXk=",
+    gallery: [
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1400&h=800&fit=crop",
+    ],
     category: "business-system",
     status: "completed",
     timeframe: "2023",
@@ -101,6 +111,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/chat-backend",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN9NM_T4hvsLnEZXdVx55CScxYGLJ5YlPLlw&s",
+    gallery: [
+      "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1400&h=800&fit=crop",
+    ],
     category: "support",
     status: "completed",
     timeframe: "2023",
@@ -121,6 +136,11 @@ export const projects: Project[] = [
     demoUrl: "https://task-api.example.com/docs",
     imageUrl:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=400&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1572177812156-58036aae439c?w=1400&h=800&fit=crop",
+    ],
     category: "business-system",
     status: "completed",
     timeframe: "2023",
@@ -140,6 +160,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/event-booking",
     imageUrl:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=400&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&h=800&fit=crop",
+    ],
     category: "commerce",
     status: "in-progress",
     timeframe: "2024",
@@ -159,6 +184,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/ai-code-generator",
     imageUrl:
       "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=400&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&h=800&fit=crop",
+    ],
     category: "automation",
     status: "in-progress",
     timeframe: "2025",
@@ -178,6 +208,11 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/username/microservices-demo",
     imageUrl:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
+    gallery: [
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=800&fit=crop",
+    ],
     category: "architecture",
     status: "completed",
     timeframe: "2024",
