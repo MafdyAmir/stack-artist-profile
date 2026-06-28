@@ -140,6 +140,41 @@ const ProjectDetail = () => {
         </section>
       )}
 
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="section-container pt-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-6 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Screenshots
+              </p>
+              <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+                A closer look at the product
+              </h2>
+            </div>
+            <Carousel opts={{ loop: true }} className="w-full">
+              <CarouselContent>
+                {project.gallery.map((src, i) => (
+                  <CarouselItem key={i}>
+                    <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl shadow-primary/10">
+                      <img
+                        src={src}
+                        alt={`${project.title} screenshot ${i + 1}`}
+                        className="h-72 w-full object-cover md:h-[28rem]"
+                        loading="lazy"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2 md:-left-6" />
+              <CarouselNext className="right-2 md:-right-6" />
+            </Carousel>
+          </div>
+        </section>
+      )}
+
+
+
       <section className="section-container pt-0">
         <div className="grid gap-6 lg:grid-cols-3">
           <Card className="border-border/60 bg-card/90">
