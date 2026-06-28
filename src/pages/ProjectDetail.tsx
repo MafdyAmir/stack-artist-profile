@@ -3,6 +3,13 @@ import { ArrowLeft, ExternalLink, Github, CheckCircle2, Lightbulb, Target, Spark
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { getProjectById } from "@/data/projects";
 
 const featureMap: Record<string, string[]> = {
