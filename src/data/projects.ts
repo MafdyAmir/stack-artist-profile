@@ -35,7 +35,7 @@ export const projects: Project[] = [
       "Publishing became quicker and more reliable, with fewer content bottlenecks and a smoother handoff between marketing and development.",
     techStack: ["NestJS", "MongoDB", "AWS S3", "Redis", "REST API"],
     githubUrl: "https://github.com/username/traditional-cms",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=900&fit=crop",
+    imageUrl: "/projects/traditional-cms/logo.png",
     gallery: [
       "/projects/traditional-cms/traditional-cms (1).png",
       "/projects/traditional-cms/traditional-cms (2).png",
