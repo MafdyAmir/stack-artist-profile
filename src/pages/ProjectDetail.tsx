@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, Lightbulb, Target, Sparkles } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, Github, CheckCircle2, Lightbulb, Target, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Carousel,
   CarouselContent,
@@ -87,6 +89,7 @@ const challengePoints: Record<string, string[]> = {
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const project = id ? getProjectById(id) : undefined;
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   if (!project) {
     return (
@@ -109,6 +112,25 @@ const ProjectDetail = () => {
 
   const features = featureMap[project.category] ?? featureMap["platform"];
   const challenges = challengePoints[project.category] ?? challengePoints["platform"];
+  const selectedImage = selectedImageIndex !== null ? project.gallery?.[selectedImageIndex] : undefined;
+
+  const openGalleryImage = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
+  const closeGalleryImage = () => {
+    setSelectedImageIndex(null);
+  };
+
+  const goToPreviousImage = () => {
+    if (!project.gallery?.length || selectedImageIndex === null) return;
+    setSelectedImageIndex((selectedImageIndex - 1 + project.gallery.length) % project.gallery.length);
+  };
+
+  const goToNextImage = () => {
+    if (!project.gallery?.length || selectedImageIndex === null) return;
+    setSelectedImageIndex((selectedImageIndex + 1) % project.gallery.length);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -154,14 +176,21 @@ const ProjectDetail = () => {
             <Carousel opts={{ loop: true }} className="w-full">
               <CarouselContent>
                 {project.gallery.map((src, i) => (
-                  <CarouselItem key={i}>
+                  <CarouselItem key={`${project.id}-${src}-${i}`}>
                     <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl shadow-primary/10">
-                      <img
-                        src={src}
-                        alt={`${project.title} screenshot ${i + 1}`}
-                        className="h-72 w-full object-cover md:h-[28rem]"
-                        loading="lazy"
-                      />
+                      <button
+                        type="button"
+                        className="block w-full cursor-zoom-in"
+                        onClick={() => openGalleryImage(i)}
+                        aria-label={`Open ${project.title} screenshot ${i + 1}`}
+                      >
+                        <img
+                          src={src}
+                          alt={`${project.title} screenshot ${i + 1}`}
+                          className="h-72 w-full object-cover md:h-[28rem]"
+                          loading="lazy"
+                        />
+                      </button>
                     </div>
                   </CarouselItem>
                 ))}
@@ -172,6 +201,43 @@ const ProjectDetail = () => {
           </div>
         </section>
       )}
+
+      <Dialog
+        open={selectedImageIndex !== null}
+        onOpenChange={(open) => {
+          if (!open) closeGalleryImage();
+        }}
+      >
+        <DialogContent className="max-w-6xl border-border/60 bg-background p-0 sm:rounded-2xl">
+          {selectedImage && selectedImageIndex !== null && (
+            <div className="relative flex items-center justify-center bg-black/5">
+              <button
+                type="button"
+                onClick={goToPreviousImage}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-border/60 bg-background/90 p-3 text-foreground shadow-lg transition hover:scale-105 hover:bg-background"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <img
+                src={selectedImage}
+                alt={`${project.title} screenshot ${selectedImageIndex + 1}`}
+                className="max-h-[85vh] w-full object-contain"
+              />
+
+              <button
+                type="button"
+                onClick={goToNextImage}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-border/60 bg-background/90 p-3 text-foreground shadow-lg transition hover:scale-105 hover:bg-background"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
 
 

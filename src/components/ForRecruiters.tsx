@@ -36,7 +36,7 @@ const ForRecruiters = () => {
             <div className="flex flex-wrap gap-3">
               <Button size="lg" asChild>
                 <a
-                  href="https://drive.google.com/file/d/16V6YNjkMBD-3IDZp6HkbQWgcUpVnqPKm/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1Q67mbk0Dp7EiN3hVbwfrupzA0xV4eF3c/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
