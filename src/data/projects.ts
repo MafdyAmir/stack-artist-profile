@@ -35,12 +35,17 @@ export const projects: Project[] = [
       "Publishing became quicker and more reliable, with fewer content bottlenecks and a smoother handoff between marketing and development.",
     techStack: ["NestJS", "MongoDB", "AWS S3", "Redis", "REST API"],
     githubUrl: "https://github.com/username/traditional-cms",
-    imageUrl:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=900&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1499750310107-5fef28eb596f?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=1400&h=800&fit=crop",
+      "/projects/traditional-cms/traditional-cms (1).png",
+      "/projects/traditional-cms/traditional-cms (2).png",
+      "/projects/traditional-cms/traditional-cms (3).png",
+      "/projects/traditional-cms/traditional-cms (4).png",
+      "/projects/traditional-cms/traditional-cms (5).png",
+      "/projects/traditional-cms/traditional-cms (6).png",
+      "/projects/traditional-cms/traditional-cms (7).png",
+      "/projects/traditional-cms/traditional-cms (8).png",
+      "/projects/traditional-cms/traditional-cms (9).png",
     ],
     category: "business-system",
     status: "completed",
@@ -60,12 +65,11 @@ export const projects: Project[] = [
     techStack: ["Node.js", "Express", "MongoDB", "Stripe", "JWT"],
     githubUrl: "https://github.com/MafdyAmir/E-commerce---express",
     demoUrl: "https://api-docs.example.com",
-    imageUrl:
-      "https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg",
+    imageUrl: "/projects/ecommerce-api/ecommerce-logo-.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&h=900&fit=crop",
     ],
     category: "commerce",
     status: "completed",
@@ -85,38 +89,13 @@ export const projects: Project[] = [
     techStack: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     githubUrl: "https://github.com/username/healthcare-api",
     demoUrl: "https://api-docs.example.com",
-    imageUrl:
-      "https://media.istockphoto.com/id/863958328/vector/stethoscope-icon.jpg?s=612x612&w=0&k=20&c=to7jGDQ9xktMUmA1CjHs5Dg_9Xg9fwhG2M5jOR-NtXk=",
+    imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&h=900&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1580281657527-47f249e8f3ea?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1600&h=900&fit=crop",
     ],
     category: "business-system",
-    status: "completed",
-    timeframe: "2023",
-  },
-  {
-    id: "realtime-chat",
-    title: "Real-Time Support Chat",
-    summary:
-      "A live messaging system for faster customer communication, better response times, and conversation history that stays organized.",
-    challenge:
-      "The client needed a chat experience that stayed responsive under load and kept message history available across devices.",
-    solution:
-      "I built a real-time chat layer with persistent storage, presence tracking, and scalable socket handling for live support.",
-    result:
-      "Support teams could answer users in real time with a smoother experience and more dependable message delivery.",
-    techStack: ["NestJS", "Socket.io", "PostgreSQL", "Redis", "Docker"],
-    githubUrl: "https://github.com/username/chat-backend",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN9NM_T4hvsLnEZXdVx55CScxYGLJ5YlPLlw&s",
-    gallery: [
-      "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1400&h=800&fit=crop",
-    ],
-    category: "support",
     status: "completed",
     timeframe: "2023",
   },
@@ -134,89 +113,19 @@ export const projects: Project[] = [
     techStack: ["Node.js", "Express", "MongoDB", "Jest", "Swagger"],
     githubUrl: "https://github.com/MafdyAmir/Trello-App",
     demoUrl: "https://task-api.example.com/docs",
-    imageUrl:
-      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=400&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1600&h=900&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1572177812156-58036aae439c?w=1400&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1572177812156-58036aae439c?w=1600&h=900&fit=crop",
     ],
     category: "business-system",
     status: "completed",
     timeframe: "2023",
   },
-  {
-    id: "event-booking",
-    title: "Booking and Ticketing Platform",
-    summary:
-      "A platform for events and reservations that keeps ticket sales, seat selection, and payments dependable under pressure.",
-    challenge:
-      "The client needed a booking flow that could handle peak traffic, hold inventory correctly, and process payments securely.",
-    solution:
-      "I built a reservation engine with dynamic pricing, ticket handling, payment processing, and real-time availability updates.",
-    result:
-      "The platform handled sales more reliably and reduced the risk of overselling or manual reconciliation.",
-    techStack: ["Node.js", "Express", "MongoDB", "Redis", "Stripe"],
-    githubUrl: "https://github.com/username/event-booking",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=400&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&h=800&fit=crop",
-    ],
-    category: "commerce",
-    status: "in-progress",
-    timeframe: "2024",
-  },
-  {
-    id: "ai-code-generator",
-    title: "AI Productivity Builder",
-    summary:
-      "An internal productivity tool that turns prompts into starter code, helping teams prototype faster and stay consistent.",
-    challenge:
-      "The team wanted to shorten the time between an idea and a working starting point without sacrificing structure or quality.",
-    solution:
-      "I created a prompt-based workflow with streaming responses, history tracking, and output formatting for practical code generation.",
-    result:
-      "Prototyping became faster and more repeatable, making it easier to move from concept to execution.",
-    techStack: ["NestJS", "OpenAI API", "TypeScript", "PostgreSQL", "Redis"],
-    githubUrl: "https://github.com/username/ai-code-generator",
-    imageUrl:
-      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=400&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&h=800&fit=crop",
-    ],
-    category: "automation",
-    status: "in-progress",
-    timeframe: "2025",
-  },
-  {
-    id: "microservices-demo",
-    title: "Scalable Service Architecture",
-    summary:
-      "A service-based architecture example that shows how to break large systems into reliable, independently managed parts.",
-    challenge:
-      "The goal was to demonstrate how a growing product can move beyond a monolith and stay observable as complexity increases.",
-    solution:
-      "I structured services around event-driven communication, gateway routing, health checks, and traceable deployment flows.",
-    result:
-      "The architecture is easier to scale, monitor, and extend when new products or teams need to plug in.",
-    techStack: ["NestJS", "gRPC", "RabbitMQ", "Docker", "Kubernetes"],
-    githubUrl: "https://github.com/username/microservices-demo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
-    gallery: [
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=800&fit=crop",
-    ],
-    category: "architecture",
-    status: "completed",
-    timeframe: "2024",
-  },
+
+
+
 ];
 
 export const getProjectById = (id: string): Project | undefined => {
