@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const stats = [
-  { value: 15, suffix: "+", label: "Projects Completed" },
-  { value: 2, suffix: "+", label: "Years of Experience" },
-  { value: 10, suffix: "+", label: "Systems Built" },
-  { value: 20, suffix: "+", label: "Technologies Mastered" },
+  { value: 15, suffix: "+", label: "Projects Completed", labelAr: "مشروعًا مكتملًا" },
+  { value: 2, suffix: "+", label: "Years of Experience", labelAr: "سنوات من الخبرة" },
+  { value: 10, suffix: "+", label: "Systems Built", labelAr: "أنظمة تم بناؤها" },
+  { value: 20, suffix: "+", label: "Technologies Mastered", labelAr: "تقنية أتقنها" },
 ];
 
-const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
+const Counter = ({
+  value,
+  suffix,
+  language,
+}: {
+  value: number;
+  suffix: string;
+  language: "en" | "ar";
+}) => {
   const [n, setN] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
@@ -37,13 +46,15 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 
   return (
     <span ref={ref}>
-      {n}
+      {new Intl.NumberFormat(language === "ar" ? "ar-EG" : "en-US").format(n)}
       {suffix}
     </span>
   );
 };
 
 const Stats = () => {
+  const { language, isArabic } = useLanguage();
+
   return (
     <section id="achievements" className="border-y border-border/60 bg-primary/5 py-16">
       <div className="section-container !py-0">
@@ -51,9 +62,11 @@ const Stats = () => {
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="mb-2 text-4xl font-bold text-primary md:text-5xl">
-                <Counter value={stat.value} suffix={stat.suffix} />
+                <Counter value={stat.value} suffix={stat.suffix} language={language} />
               </div>
-              <p className="text-sm font-medium text-foreground/70">{stat.label}</p>
+              <p className="text-sm font-medium text-foreground/70">
+                {isArabic ? stat.labelAr : stat.label}
+              </p>
             </div>
           ))}
         </div>

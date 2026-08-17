@@ -4,24 +4,38 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Project } from "@/data/projects";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ProjectCardProps {
   project: Project;
 }
 
-const statusLabels: Record<Project["status"], string> = {
-  completed: "Completed",
-  "in-progress": "In progress",
-  planned: "Planned",
+const statusLabels: Record<Project["status"], { en: string; ar: string }> = {
+  completed: { en: "Completed", ar: "مكتمل" },
+  "in-progress": { en: "In progress", ar: "قيد التنفيذ" },
+  planned: { en: "Planned", ar: "مخطط له" },
 };
 
-const formatCategory = (value: Project["category"]) =>
-  value
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
+const categoryLabels: Record<Project["category"], string> = {
+  "business-system": "أنظمة الأعمال",
+  commerce: "التجارة الإلكترونية",
+  automation: "الأتمتة",
+  support: "الدعم",
+  platform: "المنصات",
+  architecture: "هندسة الأنظمة",
+};
+
+const formatCategory = (value: Project["category"], isArabic: boolean) =>
+  isArabic
+    ? categoryLabels[value]
+    : value
+        .split("-")
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(" ");
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
+  const { isArabic } = useLanguage();
+
   return (
     <Card className="group h-full overflow-hidden border-border/70 bg-card/90 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10">
       {project.imageUrl && (
@@ -32,19 +46,19 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-          <Badge className="absolute left-4 top-4 bg-background/90 text-foreground backdrop-blur-sm">
-            {statusLabels[project.status]}
+          <Badge className="absolute start-4 top-4 bg-background/90 text-foreground backdrop-blur-sm">
+            {statusLabels[project.status][isArabic ? "ar" : "en"]}
           </Badge>
         </div>
       )}
 
       <CardHeader className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <Badge variant="outline" className="bg-primary/5 text-xs uppercase tracking-wide">
-            {project.timeframe}
+          <Badge variant="outline" className={`bg-primary/5 text-xs ${isArabic ? "" : "uppercase tracking-wide"}`}>
+            <span dir="ltr">{project.timeframe}</span>
           </Badge>
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            {formatCategory(project.category)}
+          <span className={`text-xs font-medium text-muted-foreground ${isArabic ? "" : "uppercase tracking-[0.2em]"}`}>
+            {formatCategory(project.category, isArabic)}
           </span>
         </div>
         <CardTitle className="text-2xl leading-tight">{project.title}</CardTitle>
@@ -56,20 +70,20 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       <CardContent className="space-y-5">
         <div className="grid gap-3 rounded-2xl border border-border/60 bg-secondary/20 p-4 text-sm">
           <div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Challenge
+            <p className={`mb-1 text-xs font-semibold text-muted-foreground ${isArabic ? "" : "uppercase tracking-[0.2em]"}`}>
+              {isArabic ? "التحدي" : "Challenge"}
             </p>
             <p className="leading-6 text-foreground/75">{project.challenge}</p>
           </div>
           <div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Solution
+            <p className={`mb-1 text-xs font-semibold text-muted-foreground ${isArabic ? "" : "uppercase tracking-[0.2em]"}`}>
+              {isArabic ? "الحل" : "Solution"}
             </p>
             <p className="leading-6 text-foreground/75">{project.solution}</p>
           </div>
           <div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Result
+            <p className={`mb-1 text-xs font-semibold text-muted-foreground ${isArabic ? "" : "uppercase tracking-[0.2em]"}`}>
+              {isArabic ? "النتيجة" : "Result"}
             </p>
             <p className="leading-6 text-foreground/75">{project.result}</p>
           </div>
@@ -77,7 +91,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
         <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
-            <Badge key={tech} variant="secondary" className="rounded-full px-3 py-1">
+            <Badge key={tech} variant="secondary" className="rounded-full px-3 py-1" dir="ltr">
               {tech}
             </Badge>
           ))}
@@ -87,21 +101,23 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       <CardFooter className="flex flex-wrap items-center gap-3 border-t border-border/60 pt-5">
         <Button asChild className="group/button">
           <Link to={`/projects/${project.id}`}>
-            View Case Study
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/button:translate-x-1" />
+            {isArabic ? "عرض دراسة الحالة" : "View Case Study"}
+            <ArrowRight
+              className={`h-4 w-4 transition-transform ${isArabic ? "mr-2 rotate-180 group-hover/button:-translate-x-1" : "ml-2 group-hover/button:translate-x-1"}`}
+            />
           </Link>
         </Button>
         <Button variant="outline" asChild>
           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-            <Github className="mr-2 h-4 w-4" />
-            Code
+            <Github className={`${isArabic ? "ml-2" : "mr-2"} h-4 w-4`} />
+            {isArabic ? "الكود" : "Code"}
           </a>
         </Button>
         {project.demoUrl && (
           <Button variant="outline" asChild>
             <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="mr-2 h-4 w-4" />
-              Demo
+              <ExternalLink className={`${isArabic ? "ml-2" : "mr-2"} h-4 w-4`} />
+              {isArabic ? "عرض تجريبي" : "Demo"}
             </a>
           </Button>
         )}

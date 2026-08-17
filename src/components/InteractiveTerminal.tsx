@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 interface TerminalLine {
   type: 'command' | 'output' | 'system';
@@ -8,98 +9,195 @@ interface TerminalLine {
   timestamp?: string;
 }
 
+const getInitialHistory = (isArabic: boolean): TerminalLine[] => [
+  { type: 'system', content: '$ whoami' },
+  { type: 'output', content: isArabic ? 'Mafdy - مطوّر واجهات خلفية' : 'Mafdy - Backend Developer' },
+  { type: 'system', content: '$ ls -la skills/' },
+  { type: 'output', content: 'total 8' },
+  { type: 'output', content: 'drwxr-xr-x 4 mafdy staff 128 Mar 15 10:30 nodejs/' },
+  { type: 'output', content: 'drwxr-xr-x 3 mafdy staff 96 Mar 15 10:30 express/' },
+  { type: 'output', content: 'drwxr-xr-x 3 mafdy staff 96 Mar 15 10:30 mongodb/' },
+  { type: 'system', content: '$ ./initialize.sh' },
+  {
+    type: 'output',
+    content: isArabic ? 'جارٍ تهيئة طرفية معرض الأعمال...' : 'Initializing portfolio terminal...',
+  },
+  {
+    type: 'output',
+    content: isArabic ? 'اكتب "help" لعرض الأوامر المتاحة.' : 'Type "help" for available commands.',
+  },
+];
+
 const InteractiveTerminal = ({ className }: { className?: string }) => {
+  const { isArabic } = useLanguage();
   const [input, setInput] = useState('');
   const reducedMotion = useReducedMotion();
-  const [history, setHistory] = useState<TerminalLine[]>([
-    { type: 'system', content: '$ whoami' },
-    { type: 'output', content: 'Mafdy - Backend Developer' },
-    { type: 'system', content: '$ ls -la skills/' },
-    { type: 'output', content: 'total 8' },
-    { type: 'output', content: 'drwxr-xr-x 4 mafdy staff 128 Mar 15 10:30 nodejs/' },
-    { type: 'output', content: 'drwxr-xr-x 3 mafdy staff 96 Mar 15 10:30 express/' },
-    { type: 'output', content: 'drwxr-xr-x 3 mafdy staff 96 Mar 15 10:30 mongodb/' },
-    { type: 'system', content: '$ ./initialize.sh' },
-    { type: 'output', content: 'Initializing portfolio terminal...' },
-    { type: 'output', content: 'Type "help" for available commands.' }
-  ]);
+  const [history, setHistory] = useState<TerminalLine[]>(() => getInitialHistory(isArabic));
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setHistory(getInitialHistory(isArabic));
+    setCommandHistory([]);
+    setHistoryIndex(-1);
+    setInput('');
+  }, [isArabic]);
+
   const commands = {
-    help: () => [
-      'Available commands:',
-      '',
-      'about     - Learn more about me',
-      'skills    - View my technical skills',
-      'projects  - See my portfolio projects',
-      'contact   - Get my contact information',
-      'services  - Services I provide',
-      'clear     - Clear terminal',
-      'whoami    - Display user info',
-      'ls        - List contents',
-      'pwd       - Print working directory',
-      ''
-    ],
-    about: () => [
-      'Hi! I\'m Mafdy, a passionate Backend Developer.',
-      'I specialize in building scalable, reliable backend systems.',
-      'Currently focused on Node.js, Express.js, and MongoDB.',
-      ''
-    ],
-    skills: () => [
-      'Technical Skills:',
-      '• Backend: Node.js, Express.js, MongoDB',
-      '• Languages: JavaScript, TypeScript, Python',
-      '• Tools: Git, Docker, AWS, Linux',
-      '• Databases: MongoDB, PostgreSQL, Redis',
-      '• APIs: REST, GraphQL, WebSocket',
-      ''
-    ],
-    projects: () => [
-      'Featured Projects:',
-      '• E-commerce API - RESTful API with payment integration',
-      '• Real-time Chat App - WebSocket-based messaging system',
-      '• Task Management System - Full-stack project management tool',
-      '• Authentication Service - JWT-based auth microservice',
-      '',
-      'Visit the Projects section to see more details!'
-    ],
-    contact: () => [
-      'Contact Information:',
-      '• Email: contact@example.com',
-      '• Phone: +1 (555) 123-4567',
-      '• Location: Your City, Country',
-      '• LinkedIn: linkedin.com/in/yourusername',
-      '• GitHub: github.com/yourusername',
-      ''
-    ],
-    services: () => [
-      'Services I Provide:',
-      '',
-      '🚀 Backend Development',
-      '   • RESTful API design and development',
-      '   • Database design and optimization',
-      '   • Server architecture and deployment',
-      '',
-      '⚡ Performance Optimization',
-      '   • Database query optimization',
-      '   • Caching strategies implementation',
-      '   • Load balancing and scaling',
-      '',
-      '🔒 Security Implementation',
-      '   • Authentication and authorization',
-      '   • Data encryption and validation',
-      '   • Security auditing and testing',
-      '',
-      '🛠️ Technical Consulting',
-      '   • Architecture planning and review',
-      '   • Code review and best practices',
-      '   • Technology stack recommendations',
-      ''
-    ],
+    help: () =>
+      isArabic
+        ? [
+            'الأوامر المتاحة:',
+            '',
+            'about     - تعرّف عليّ أكثر',
+            'skills    - اعرض مهاراتي التقنية',
+            'projects  - شاهد مشروعات معرض الأعمال',
+            'contact   - اعرض معلومات التواصل',
+            'services  - اعرض الخدمات التي أقدمها',
+            'clear     - امسح محتوى الطرفية',
+            'whoami    - اعرض معلومات المستخدم',
+            'ls        - اعرض المحتويات',
+            'pwd       - اعرض مسار العمل الحالي',
+            '',
+          ]
+        : [
+            'Available commands:',
+            '',
+            'about     - Learn more about me',
+            'skills    - View my technical skills',
+            'projects  - See my portfolio projects',
+            'contact   - Get my contact information',
+            'services  - Services I provide',
+            'clear     - Clear terminal',
+            'whoami    - Display user info',
+            'ls        - List contents',
+            'pwd       - Print working directory',
+            '',
+          ],
+    about: () =>
+      isArabic
+        ? [
+            'مرحبًا! أنا مفدي، مطوّر واجهات خلفية شغوف بعملي.',
+            'أتخصص في بناء أنظمة خلفية موثوقة وقابلة للتوسع.',
+            'أركز حاليًا على Node.js وExpress.js وMongoDB.',
+            '',
+          ]
+        : [
+            'Hi! I\'m Mafdy, a passionate Backend Developer.',
+            'I specialize in building scalable, reliable backend systems.',
+            'Currently focused on Node.js, Express.js, and MongoDB.',
+            '',
+          ],
+    skills: () =>
+      isArabic
+        ? [
+            'المهارات التقنية:',
+            '• الواجهات الخلفية: Node.js, Express.js, MongoDB',
+            '• اللغات: JavaScript, TypeScript, Python',
+            '• الأدوات: Git, Docker, AWS, Linux',
+            '• قواعد البيانات: MongoDB, PostgreSQL, Redis',
+            '• واجهات البرمجة: REST, GraphQL, WebSocket',
+            '',
+          ]
+        : [
+            'Technical Skills:',
+            '• Backend: Node.js, Express.js, MongoDB',
+            '• Languages: JavaScript, TypeScript, Python',
+            '• Tools: Git, Docker, AWS, Linux',
+            '• Databases: MongoDB, PostgreSQL, Redis',
+            '• APIs: REST, GraphQL, WebSocket',
+            '',
+          ],
+    projects: () =>
+      isArabic
+        ? [
+            'مشروعات مختارة:',
+            '• واجهة تجارة إلكترونية - REST API متكاملة مع الدفع',
+            '• تطبيق محادثة فورية - نظام رسائل مبني على WebSocket',
+            '• نظام إدارة مهام - أداة متكاملة لإدارة المشروعات',
+            '• خدمة مصادقة - خدمة مستقلة تعتمد على JWT',
+            '',
+            'انتقل إلى قسم المشروعات للاطلاع على مزيد من التفاصيل!',
+          ]
+        : [
+            'Featured Projects:',
+            '• E-commerce API - RESTful API with payment integration',
+            '• Real-time Chat App - WebSocket-based messaging system',
+            '• Task Management System - Full-stack project management tool',
+            '• Authentication Service - JWT-based auth microservice',
+            '',
+            'Visit the Projects section to see more details!',
+          ],
+    contact: () =>
+      isArabic
+        ? [
+            'معلومات التواصل:',
+            '• البريد الإلكتروني: mafdyamir15@gmail.com',
+            '• واتساب: +20 127 115 1446',
+            '• LinkedIn: linkedin.com/in/mafdy-amir/',
+            '• GitHub: github.com/mafdyamir',
+            '',
+          ]
+        : [
+            'Contact Information:',
+            '• Email: mafdyamir15@gmail.com',
+            '• WhatsApp: +20 127 115 1446',
+            '• LinkedIn: linkedin.com/in/mafdy-amir/',
+            '• GitHub: github.com/mafdyamir',
+            '',
+          ],
+    services: () =>
+      isArabic
+        ? [
+            'الخدمات التي أقدمها:',
+            '',
+            '🚀 تطوير الواجهات الخلفية',
+            '   • تصميم وتطوير RESTful APIs',
+            '   • تصميم قواعد البيانات وتحسينها',
+            '   • هندسة الخوادم ونشرها',
+            '',
+            '⚡ تحسين الأداء',
+            '   • تحسين استعلامات قواعد البيانات',
+            '   • تطبيق استراتيجيات التخزين المؤقت',
+            '   • موازنة الأحمال والتوسع',
+            '',
+            '🔒 تطبيقات الأمان',
+            '   • المصادقة وإدارة الصلاحيات',
+            '   • تشفير البيانات والتحقق منها',
+            '   • تدقيق الأمان واختباره',
+            '',
+            '🛠️ الاستشارات التقنية',
+            '   • تخطيط البنية ومراجعتها',
+            '   • مراجعة الكود وأفضل الممارسات',
+            '   • ترشيح التقنيات المناسبة',
+            '',
+          ]
+        : [
+            'Services I Provide:',
+            '',
+            '🚀 Backend Development',
+            '   • RESTful API design and development',
+            '   • Database design and optimization',
+            '   • Server architecture and deployment',
+            '',
+            '⚡ Performance Optimization',
+            '   • Database query optimization',
+            '   • Caching strategies implementation',
+            '   • Load balancing and scaling',
+            '',
+            '🔒 Security Implementation',
+            '   • Authentication and authorization',
+            '   • Data encryption and validation',
+            '   • Security auditing and testing',
+            '',
+            '🛠️ Technical Consulting',
+            '   • Architecture planning and review',
+            '   • Code review and best practices',
+            '   • Technology stack recommendations',
+            '',
+          ],
     whoami: () => ['mafdy'],
     pwd: () => ['/home/mafdy/portfolio'],
     ls: () => ['about.md', 'skills/', 'projects/', 'contact.txt', 'services.json'],
@@ -129,7 +227,9 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
     } else {
       newHistory.push({ 
         type: 'output', 
-        content: `Command not found: ${cmd}. Type "help" for available commands.` 
+        content: isArabic
+          ? `الأمر غير موجود: ${cmd}. اكتب "help" لعرض الأوامر المتاحة.`
+          : `Command not found: ${cmd}. Type "help" for available commands.`
       });
     }
 
@@ -188,8 +288,10 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
   }, [reducedMotion]);
 
   return (
-    <div className={cn(
-      "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-emerald-400 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm",
+    <div
+      dir="ltr"
+      className={cn(
+      "terminal-ltr bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-emerald-400 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm",
       "relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-emerald-500/5 before:via-transparent before:to-blue-500/5 before:pointer-events-none",
       className
     )}>
@@ -228,13 +330,15 @@ const InteractiveTerminal = ({ className }: { className?: string }) => {
           <span className="text-blue-400 mr-2 font-bold text-xs sm:text-sm">❯</span>
           <input
             ref={inputRef}
+            dir="ltr"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             className="bg-transparent border-none outline-none flex-1 text-emerald-400 font-mono placeholder:text-slate-500 caret-emerald-400 text-xs sm:text-sm"
             autoComplete="off"
-            placeholder="Type 'help' for commands..."
+            aria-label={isArabic ? "أدخل أمرًا في الطرفية" : "Enter a terminal command"}
+            placeholder={isArabic ? "اكتب 'help' لعرض الأوامر..." : "Type 'help' for commands..."}
           />
           <div className={`w-1.5 h-4 sm:w-2 sm:h-5 bg-emerald-400 ml-1 ${reducedMotion ? '' : 'animate-pulse'}`}></div>
         </form>
