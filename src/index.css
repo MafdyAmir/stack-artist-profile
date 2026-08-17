@@ -94,6 +94,19 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  html[lang="ar"] body {
+    font-family: "Noto Sans Arabic", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
+    line-height: 1.75;
+  }
+
+  html[lang="ar"] .uppercase {
+    text-transform: none;
+  }
+
+  html[lang="ar"] [class*="tracking-"] {
+    letter-spacing: normal;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -132,9 +145,35 @@
 
   .section-title::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-16 h-1 bg-primary mt-2;
+    @apply absolute bottom-0 w-16 h-1 bg-primary mt-2;
+    inset-inline-start: 0;
     animation: expand 1s ease forwards;
     transform-origin: left;
+  }
+
+  html[dir="rtl"] .section-title::after {
+    transform-origin: right;
+  }
+
+  .keep-ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  .terminal-ltr,
+  .floating-code {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .floating-actions {
+    inset-inline-end: 2rem;
+    align-items: flex-end;
+  }
+
+  html[dir="rtl"] .scroll-progress-bar > div {
+    margin-inline-start: 0;
+    margin-inline-end: auto;
   }
   
   .animate-on-scroll {

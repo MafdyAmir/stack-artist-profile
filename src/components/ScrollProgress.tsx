@@ -25,7 +25,9 @@ const ScrollProgress = () => {
     <div className="scroll-progress-bar">
       <div
         className={`h-full bg-gradient-to-r from-primary to-primary/80 ${reducedMotion ? '' : 'transition-all duration-200 ease-out'}`}
-        style={{ width: `${scrollProgress}%` }}
+        style={{
+          width: `${Number.isFinite(scrollProgress) ? scrollProgress : 0}%`,
+        }}
       />
     </div>
   );

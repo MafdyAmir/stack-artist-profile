@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import InteractiveTerminal from "./InteractiveTerminal";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { ArrowRight, MessageCircle, Mail } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const reducedMotion = useReducedMotion();
+  const { isArabic } = useLanguage();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), reducedMotion ? 0 : 200);
@@ -43,37 +45,45 @@ const Hero = () => {
               <div className="hero-card-inner">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
                   <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                  Available for new projects
+                  {isArabic ? "متاح لمشروعات جديدة" : "Available for new projects"}
                 </div>
                 <h1 className="hero-name text-balance">
-                  I Build Web Solutions That Help Businesses Grow
+                  {isArabic
+                    ? "أبني حلول ويب تساعد الشركات على النمو"
+                    : "I Build Web Solutions That Help Businesses Grow"}
                 </h1>
                 <h2 className="hero-title">
-                  <span className="animated-text-enhanced">Full-Stack Developer</span>
-                  <span className="text-foreground/70"> · Backend Specialist</span>
+                  <span className="animated-text-enhanced">
+                    {isArabic ? "مطوّر ويب متكامل" : "Full-Stack Developer"}
+                  </span>
+                  <span className="text-foreground/70">
+                    {isArabic ? " · متخصص في الواجهات الخلفية" : " · Backend Specialist"}
+                  </span>
                 </h2>
                 <p className="hero-description">
-                  I partner with startups, agencies, and product teams to design and build
-                  fast, reliable, and scalable web applications — from custom business
-                  systems to e-commerce platforms and APIs.
+                  {isArabic
+                    ? "أتعاون مع الشركات الناشئة والوكالات وفرق المنتجات لتصميم وبناء تطبيقات ويب سريعة وموثوقة وقابلة للتوسع، بدءًا من أنظمة الأعمال المخصصة ووصولًا إلى منصات التجارة الإلكترونية وواجهات البرمجة."
+                    : "I partner with startups, agencies, and product teams to design and build fast, reliable, and scalable web applications — from custom business systems to e-commerce platforms and APIs."}
                 </p>
                 <div className="hero-buttons">
                   <Button size="lg" className="hero-primary-btn" asChild>
                     <a href="#contact">
-                      Let's Discuss Your Project
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      {isArabic ? "لنناقش مشروعك" : "Let's Discuss Your Project"}
+                      <ArrowRight className="ms-2 h-5 w-5 rtl:rotate-180" />
                     </a>
                   </Button>
                   <Button size="lg" variant="outline" className="hero-secondary-btn" asChild>
-                    <a href="#projects">View My Work</a>
+                    <a href="#projects">{isArabic ? "شاهد أعمالي" : "View My Work"}</a>
                   </Button>
                 </div>
                 <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/60">
                   <span className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" /> Replies within 24 hours
+                    <Mail className="h-4 w-4" />
+                    {isArabic ? "أرد خلال 24 ساعة" : "Replies within 24 hours"}
                   </span>
                   <span className="flex items-center gap-2">
-                    <MessageCircle className="h-4 w-4" /> Free 30-min consultation
+                    <MessageCircle className="h-4 w-4" />
+                    {isArabic ? "استشارة مجانية لمدة 30 دقيقة" : "Free 30-min consultation"}
                   </span>
                 </div>
               </div>

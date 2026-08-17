@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -11,6 +13,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const location = useLocation();
   const navigate = useNavigate();
+  const { isArabic } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,19 +76,20 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: "Home", section: "home" },
-    { name: "Services", section: "services" },
-    { name: "About", section: "about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Why Work With Me", section: "why" },
-    { name: "Recruiters", section: "recruiters" },
-    { name: "Contact", section: "contact" },
+    { name: isArabic ? "الرئيسية" : "Home", section: "home" },
+    { name: isArabic ? "الخدمات" : "Services", section: "services" },
+    { name: isArabic ? "نبذة عني" : "About", section: "about" },
+    { name: isArabic ? "المشاريع" : "Projects", href: "/projects" },
+    { name: isArabic ? "لماذا تتعاون معي" : "Why Work With Me", section: "why" },
+    { name: isArabic ? "لأصحاب العمل" : "Recruiters", section: "recruiters" },
+    { name: isArabic ? "تواصل معي" : "Contact", section: "contact" },
   ];
 
   const isProjectsPage = location.pathname.startsWith("/projects");
 
   return (
     <nav
+      aria-label={isArabic ? "التنقل الرئيسي" : "Primary navigation"}
       className={cn(
         "transition-all duration-500",
         isScrolled
@@ -99,13 +103,14 @@ const Navbar = () => {
             <button 
               onClick={handleLogoClick}
               className="text-xl font-bold relative group cursor-pointer bg-transparent border-none"
+              aria-label={isArabic ? "الانتقال إلى الصفحة الرئيسية" : "Go to the home page"}
             >
-              <span className="relative z-10 animated-text">{"<MafdyAmir />"}</span>
+              <span className="keep-ltr relative z-10 animated-text">{"<MafdyAmir />"}</span>
               {/* <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span> */}
             </button>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-6">
             {navLinks.map((link) => {
               const isActive = isProjectsPage && link.href
                 ? true
@@ -114,7 +119,7 @@ const Navbar = () => {
               if (link.href) {
                 return (
                   <Link
-                    key={link.name}
+                    key={link.href}
                     to={link.href}
                     className={cn(
                       "nav-link transition-colors cursor-pointer",
@@ -130,7 +135,7 @@ const Navbar = () => {
 
               return (
                 <button
-                  key={link.name}
+                  key={link.section}
                   onClick={() => handleSectionClick(link.section)}
                   className={cn(
                     "nav-link transition-colors cursor-pointer bg-transparent border-none",
@@ -143,18 +148,26 @@ const Navbar = () => {
                 </button>
               );
             })}
-            <ThemeToggle />
-          </div>
-          
-          <div className="flex md:hidden">
-            <div className="mr-2">
+            <div className="flex items-center gap-1">
+              <LanguageToggle />
               <ThemeToggle />
             </div>
+          </div>
+
+          <div className="flex items-center gap-1 lg:hidden">
+            <LanguageToggle />
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleMobileMenu}
-              aria-label="Open menu"
+              aria-label={
+                isMobileMenuOpen
+                  ? isArabic ? "إغلاق القائمة" : "Close menu"
+                  : isArabic ? "فتح القائمة" : "Open menu"
+              }
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               <Menu className="h-5 w-5" />
             </Button>
@@ -163,9 +176,10 @@ const Navbar = () => {
       </div>
       
       <div
+        id="mobile-navigation"
         className={cn(
-          "md:hidden transition-all duration-500 ease-in-out overflow-hidden",
-          isMobileMenuOpen ? "max-h-64" : "max-h-0"
+          "lg:hidden transition-all duration-500 ease-in-out overflow-hidden",
+          isMobileMenuOpen ? "max-h-[32rem]" : "max-h-0"
         )}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-background/90 backdrop-blur-md shadow-sm">
@@ -177,10 +191,10 @@ const Navbar = () => {
             if (link.href) {
               return (
                 <Link
-                  key={link.name}
+                  key={link.href}
                   to={link.href}
                   className={cn(
-                    "block rounded-md px-3 py-2 text-base font-medium transition-colors duration-300 cursor-pointer",
+                    "block rounded-md px-3 py-2 text-start text-base font-medium transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -194,10 +208,10 @@ const Navbar = () => {
 
             return (
               <button
-                key={link.name}
+                key={link.section}
                 onClick={() => handleSectionClick(link.section)}
                 className={cn(
-                  "block w-full rounded-md bg-transparent border-none px-3 py-2 text-left text-base font-medium transition-colors duration-300 cursor-pointer",
+                  "block w-full rounded-md bg-transparent border-none px-3 py-2 text-start text-base font-medium transition-colors duration-300 cursor-pointer",
                   isActive
                     ? "bg-primary/10 text-primary"
                     : "hover:bg-accent hover:text-accent-foreground"

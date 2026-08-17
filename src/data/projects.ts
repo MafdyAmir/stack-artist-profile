@@ -1,3 +1,5 @@
+export type ProjectLanguage = "en" | "ar";
+
 export interface Project {
   id: string;
   title: string;
@@ -128,11 +130,76 @@ export const projects: Project[] = [
 
 ];
 
-export const getProjectById = (id: string): Project | undefined => {
-  return projects.find((project) => project.id === id);
+type ProjectCopy = Pick<Project, "title" | "summary" | "challenge" | "solution" | "result">;
+
+const arabicProjectCopy: Record<string, ProjectCopy> = {
+  "traditional-cms": {
+    title: "نظام إدارة محتوى",
+    summary:
+      "نظام إدارة محتوى يساعد الفرق على النشر بسرعة أكبر، وإدارة المحتوى بأمان، وتحديث المواقع دون الاعتماد المستمر على المطورين.",
+    challenge:
+      "احتاج الفريق إلى مكان واحد لإدارة الصفحات والوسائط والمحتوى القابل لإعادة الاستخدام، دون التأثير في الموقع المنشور أو إضافة أعمال يدوية غير ضرورية.",
+    solution:
+      "صممت منصة محتوى منظمة بصلاحيات مبنية على الأدوار، ونماذج محتوى مرنة، وإدارة للوسائط، وواجهة برمجية واضحة لربط الواجهة الأمامية.",
+    result:
+      "أصبح النشر أسرع وأكثر موثوقية، مع تقليل اختناقات المحتوى وتحسين التعاون بين فريقي التسويق والتطوير.",
+  },
+  "ecommerce-api": {
+    title: "محرك خلفي للتجارة الإلكترونية",
+    summary:
+      "نظام خلفي لمتجر إلكتروني يوفر دفعًا آمنًا، وإدارة للمخزون والطلبات، وبنية جاهزة لدعم النمو.",
+    challenge:
+      "احتاج المتجر إلى مسار شراء موثوق يدير تصفح المنتجات ومعالجة المدفوعات وتتبع الطلبات دون إبطاء المبيعات.",
+    solution:
+      "أنشأت واجهة برمجية للتجارة الإلكترونية تشمل المصادقة، ومنطق سلة التسوق، وتكامل الدفع، وإدارة المنتجات، وأدوات تشغيل للمسؤولين.",
+    result:
+      "حصل النشاط التجاري على تجربة شراء مستقرة تدعم عمليات المبيعات، وتقلل المعالجة اليدوية، وتستعد للتوسع مستقبلًا.",
+  },
+  "healthcare-api": {
+    title: "واجهة برمجية لحجز الخدمات",
+    summary:
+      "نظام خلفي للأنشطة الخدمية التي تحتاج إلى إدارة المواعيد، وتدفق آمن للبيانات، وتفاعل موثوق مع العملاء.",
+    challenge:
+      "كان على النظام دعم إدارة الطلبات وصلاحيات المستخدمين وسير العمل، مع إبقاء البيانات الحساسة منظمة وسهلة الاسترجاع.",
+    solution:
+      "طورت واجهة برمجية موجهة للخدمات تشمل المصادقة والتحقق من البيانات وتصميم هياكلها والتكامل الآمن مع بوابات العمليات اليومية.",
+    result:
+      "تمكنت الفرق من إدارة الطلبات بكفاءة أكبر، بينما حصل العملاء على تجربة خدمة أوضح وأكثر موثوقية.",
+  },
+  "task-management-api": {
+    title: "واجهة برمجية لسير عمل الفرق",
+    summary:
+      "منصة لإدارة العمل تساعد الفرق على توزيع المهام، ومتابعة التقدم، وتوضيح مسؤولية كل عضو.",
+    challenge:
+      "احتاج الفريق إلى سير عمل أوضح لتخطيط المهام وتوزيعها وإبقاء الجميع على اطلاع بحالة التسليم.",
+    solution:
+      "طورت واجهة برمجية تشمل تسلسل المهام والصلاحيات والإشعارات والتقارير وهيكلًا منظمًا للعمليات اليومية.",
+    result:
+      "حصل الفريق على رؤية أوضح للعمل الجاري، وانخفضت حالات تعطل التسليم بين مراحل المشروعات.",
+  },
 };
 
-export const getProjectsByCategory = (category: string): Project[] => {
-  if (category === "all") return projects;
-  return projects.filter((project) => project.category === category);
+const localizeProject = (project: Project, language: ProjectLanguage): Project =>
+  language === "ar" && arabicProjectCopy[project.id]
+    ? { ...project, ...arabicProjectCopy[project.id] }
+    : project;
+
+export const getProjects = (language: ProjectLanguage = "en"): Project[] =>
+  projects.map((project) => localizeProject(project, language));
+
+export const getProjectById = (
+  id: string,
+  language: ProjectLanguage = "en",
+): Project | undefined => {
+  const project = projects.find((item) => item.id === id);
+  return project ? localizeProject(project, language) : undefined;
+};
+
+export const getProjectsByCategory = (
+  category: string,
+  language: ProjectLanguage = "en",
+): Project[] => {
+  const localizedProjects = getProjects(language);
+  if (category === "all") return localizedProjects;
+  return localizedProjects.filter((project) => project.category === category);
 };
