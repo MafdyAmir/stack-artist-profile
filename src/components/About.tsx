@@ -95,7 +95,7 @@ const About = () => {
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a
-                  href="https://drive.google.com/file/d/1Q67mbk0Dp7EiN3hVbwfrupzA0xV4eF3c/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1xcAqeZc85bAhwzqRLhSLdk4u-MY7z7rX/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
